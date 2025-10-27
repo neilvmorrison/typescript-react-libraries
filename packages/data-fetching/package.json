@@ -1,7 +1,7 @@
 {
-  "name": "@libraries/primitives",
+  "name": "@libraries/hooks",
   "version": "0.0.1",
-  "description": "React UI primitives library with CSS modules",
+  "description": "React hooks library",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -22,14 +22,10 @@
   },
   "peerDependencies": {
     "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "sonner": "^1.0.0",
-    "react-icons": "^5.0.0"
+    "react-dom": "^18.0.0"
   },
   "keywords": [
-    "components",
-    "ui",
-    "primitives",
+    "hooks",
     "react",
     "typescript"
   ],

@@ -15,3 +15,8 @@ export {
   ApiError,
 } from './api_fetch/api_fetch';
 export type { IApiError, IApiFetchOptions } from './api_fetch/api_fetch';
+export { build_page_metadata } from './build_page_metadata/build_page_metadata';
+export type {
+  IBuildPageMetadataConfig,
+  IBuildPageMetadataReturn,
+} from './build_page_metadata/build_page_metadata';

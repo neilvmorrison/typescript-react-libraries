@@ -8,3 +8,4 @@ export type {
 export { usePrevious } from './use_previous/use_previous';
 export { useLocalStorage } from './use_local_storage/use_local_storage';
 export type { IUseLocalStorageReturn } from './use_local_storage/use_local_storage';
+export { useToggle } from './use_toggle/use_toggle';
