@@ -1,0 +1,10 @@
+node_modules
+dist
+build
+coverage
+.turbo
+.vscode/settings.json
+*.tsbuildinfo
+.DS_Store
+.env
+.env.local

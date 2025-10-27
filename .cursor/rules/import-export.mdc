@@ -1,0 +1,6 @@
+---
+alwaysApply: true
+---
+
+1. prefer named exports to default exports for all utilities and components
+2. prefer destructuring React types: i.e., useEffect() vs. React.useEffect()

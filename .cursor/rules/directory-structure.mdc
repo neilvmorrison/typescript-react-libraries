@@ -1,0 +1,5 @@
+---
+alwaysApply: true
+---
+
+1. css modules, component files and test files should all be grouped in their own directories

@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "jsx": "react-jsx",
+    "baseUrl": ".",
+    "paths": {
+      "@libraries/utilities": ["packages/utilities/src/index.ts"],
+      "@libraries/utilities/*": ["packages/utilities/src/*"],
+      "@libraries/hooks": ["packages/hooks/src/index.ts"],
+      "@libraries/hooks/*": ["packages/hooks/src/*"],
+      "@libraries/primitives": ["packages/primitives/src/index.ts"],
+      "@libraries/primitives/*": ["packages/primitives/src/*"]
+    },
+    "types": ["vitest/globals"]
+  },
+  "include": ["packages/*/src"],
+  "exclude": ["node_modules", "dist", "build"]
+}

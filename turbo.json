@@ -1,0 +1,23 @@
+{
+  "globalDependencies": ["tsconfig.json", ".eslintrc.json"],
+  "tasks": {
+    "build": {
+      "outputs": ["dist/**"],
+      "cache": true
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "test": {
+      "outputs": ["coverage/**"],
+      "cache": true
+    },
+    "type-check": {
+      "cache": true
+    },
+    "lint": {
+      "cache": true
+    }
+  }
+}

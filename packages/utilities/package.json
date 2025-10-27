@@ -1,0 +1,29 @@
+{
+  "name": "@libraries/utilities",
+  "version": "0.0.1",
+  "description": "TypeScript utility functions",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "clean": "rm -rf dist",
+    "build": "npm run clean && tsc",
+    "dev": "tsc --watch",
+    "test": "vitest"
+  },
+  "keywords": [
+    "utilities",
+    "typescript"
+  ],
+  "author": "",
+  "license": "MIT"
+}
