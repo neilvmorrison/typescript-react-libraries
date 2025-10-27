@@ -64,7 +64,7 @@ interface IAuthor {
   url?: string;
 }
 
-interface IBuildPageMetadataConfig {
+export interface IBuildPageMetadataConfig {
   title: string;
   description: string;
   canonical_url?: string;
@@ -121,7 +121,7 @@ interface IMetadataAuthor {
   url?: string;
 }
 
-interface IBuildPageMetadataReturn {
+export interface IBuildPageMetadataReturn {
   title?: string;
   description?: string;
   keywords?: string[];
