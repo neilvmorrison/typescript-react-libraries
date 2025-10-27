@@ -47,6 +47,16 @@ export interface IUseFormReturn<T> {
   ) => void;
   handleSubmit: (event: React.FormEvent<HTMLFormElement>) => Promise<void>;
   reset: () => void;
+  getFormFieldProps: (field: keyof T) => {
+    name: keyof T;
+    value: unknown;
+    onChange: (
+      event: React.ChangeEvent<
+        HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+      >
+    ) => void;
+    error: string | undefined;
+  };
 }
 
 export function useForm<T extends Record<string, unknown>>(
@@ -116,13 +126,25 @@ export function useForm<T extends Record<string, unknown>>(
         setIsSubmitting(false);
       }
     },
-    [values, options]
+    [values, options, submitAttempts]
   );
 
   const reset = useCallback(() => {
     setValues(options.initialValues);
     setErrors({});
   }, [options.initialValues]);
+
+  const getFormFieldProps = useCallback(
+    (field: keyof T) => {
+      return {
+        name: field,
+        value: values[field],
+        onChange: handleChange,
+        error: errors[field],
+      };
+    },
+    [values, handleChange, errors]
+  );
 
   return {
     values,
@@ -132,6 +154,7 @@ export function useForm<T extends Record<string, unknown>>(
     setFieldValue,
     handleChange,
     handleSubmit,
+    getFormFieldProps,
     reset,
   };
 }

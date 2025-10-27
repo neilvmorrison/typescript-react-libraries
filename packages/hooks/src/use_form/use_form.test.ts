@@ -176,4 +176,20 @@ describe('useForm', () => {
     expect(result.current.isSubmitting).toBe(false);
     expect(onSubmit).toHaveBeenCalledTimes(1);
   });
+
+  it('should get form field props', () => {
+    const { result } = renderHook(() =>
+      useForm({
+        initialValues: { email: 'test@example.com' },
+        onSubmit: vi.fn(),
+      })
+    );
+
+    const props = result.current.getFormFieldProps('email');
+
+    expect(props.name).toBe('email');
+    expect(props.value).toBe('test@example.com');
+    expect(props.onChange).toBeDefined();
+    expect(props.error).toBeUndefined();
+  });
 });
