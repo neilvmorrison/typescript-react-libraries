@@ -6,13 +6,13 @@ export function useDisclosure(): [
 ] {
   const [isOpen, setIsOpen] = useState(false);
 
-  const openModal = useCallback(() => {
+  const open = useCallback(() => {
     setIsOpen(true);
   }, []);
 
-  const closeModal = useCallback(() => {
+  const close = useCallback(() => {
     setIsOpen(false);
   }, []);
 
-  return [isOpen, { open: openModal, close: closeModal }];
+  return [isOpen, { open, close }];
 }
