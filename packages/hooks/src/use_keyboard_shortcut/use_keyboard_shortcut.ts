@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEventListener } from '../use_event_listener/use_event_listener';
 
 /**
  * Registers a keyboard shortcut with optional modifiers (ctrl, shift, alt, meta).
@@ -29,39 +29,38 @@ export interface IUseKeyboardShortcutOptions {
 export function useKeyboardShortcut(
   options: IUseKeyboardShortcutOptions
 ): void {
-  useEffect(() => {
-    const handle_key_press = (event: KeyboardEvent): void => {
-      const modifiers_match =
-        !options.modifiers ||
-        options.modifiers.every((modifier) => {
-          switch (modifier) {
-            case 'ctrl':
-              return event.ctrlKey || event.metaKey;
-            case 'shift':
-              return event.shiftKey;
-            case 'alt':
-              return event.altKey;
-            case 'meta':
-              return event.metaKey;
-            default:
-              return false;
-          }
-        });
+  function handleKeyDown(event: KeyboardEvent) {
+    if (event.key.toLowerCase() !== options.key.toLowerCase()) {
+      return;
+    }
 
-      if (
-        modifiers_match &&
-        event.key.toLowerCase() === options.key.toLowerCase()
-      ) {
-        if (options.preventDefault ?? true) {
-          event.preventDefault();
+    if (options.modifiers && options.modifiers.length > 0) {
+      const allModifiersPressed = options.modifiers.every((modifier) => {
+        switch (modifier) {
+          case 'ctrl':
+            return event.ctrlKey || event.metaKey;
+          case 'shift':
+            return event.shiftKey;
+          case 'alt':
+            return event.altKey;
+          case 'meta':
+            return event.metaKey;
+          default:
+            return false;
         }
-        options.onPress();
-      }
-    };
+      });
 
-    window.addEventListener('keydown', handle_key_press);
-    return () => {
-      window.removeEventListener('keydown', handle_key_press);
-    };
-  }, [options]);
+      if (!allModifiersPressed) {
+        return;
+      }
+    }
+
+    if (options.preventDefault !== false) {
+      event.preventDefault();
+    }
+
+    options.onPress();
+  }
+
+  useEventListener('keydown', handleKeyDown);
 }

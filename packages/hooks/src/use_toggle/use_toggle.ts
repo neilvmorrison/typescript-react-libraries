@@ -12,7 +12,8 @@ export function useToggle(
     if (typeof initialValue === 'boolean') {
       setValue((prev) => !prev);
     } else {
-      const newIndex = toggleIndex + 1;
+      const newIndex =
+        toggleIndex === initialValue.length - 1 ? 0 : toggleIndex + 1;
       setToggleIndex(newIndex);
       setValue(initialValue[newIndex]);
     }

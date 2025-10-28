@@ -3,7 +3,15 @@
   "compilerOptions": {
     "outDir": "./dist",
     "rootDir": "./src",
-    "lib": ["ES2020", "DOM", "DOM.Iterable"]
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "paths": {
+      "@libraries/utilities": ["../utilities/dist/index.d.ts"],
+      "@libraries/utilities/*": ["../utilities/dist/*"],
+      "@libraries/hooks": ["./src/index.ts"],
+      "@libraries/hooks/*": ["./src/*"],
+      "@libraries/primitives": ["../primitives/dist/index.d.ts"],
+      "@libraries/primitives/*": ["../primitives/dist/*"]
+    }
   },
   "include": ["src"],
   "exclude": ["**/*.test.ts", "**/*.test.tsx"]

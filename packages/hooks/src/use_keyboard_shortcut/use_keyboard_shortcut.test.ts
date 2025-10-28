@@ -3,14 +3,14 @@ import { renderHook } from '@testing-library/react';
 import { useKeyboardShortcut } from './use_keyboard_shortcut';
 
 describe('useKeyboardShortcut', () => {
-  it('should call onPress when key is pressed', () => {
+  it('should call onPress when key is pressed without modifiers', () => {
     const onPress = vi.fn();
-    renderHook(() =>
+    renderHook(() => {
       useKeyboardShortcut({
         key: 's',
         onPress,
-      })
-    );
+      });
+    });
 
     const event = new KeyboardEvent('keydown', { key: 's' });
     window.dispatchEvent(event);
@@ -18,15 +18,30 @@ describe('useKeyboardShortcut', () => {
     expect(onPress).toHaveBeenCalledTimes(1);
   });
 
+  it('should not call onPress when wrong key is pressed', () => {
+    const onPress = vi.fn();
+    renderHook(() => {
+      useKeyboardShortcut({
+        key: 's',
+        onPress,
+      });
+    });
+
+    const event = new KeyboardEvent('keydown', { key: 'a' });
+    window.dispatchEvent(event);
+
+    expect(onPress).not.toHaveBeenCalled();
+  });
+
   it('should work with ctrl modifier', () => {
     const onPress = vi.fn();
-    renderHook(() =>
+    renderHook(() => {
       useKeyboardShortcut({
         key: 's',
         modifiers: ['ctrl'],
         onPress,
-      })
-    );
+      });
+    });
 
     const eventWithoutCtrl = new KeyboardEvent('keydown', { key: 's' });
     window.dispatchEvent(eventWithoutCtrl);
@@ -40,15 +55,15 @@ describe('useKeyboardShortcut', () => {
     expect(onPress).toHaveBeenCalledTimes(1);
   });
 
-  it('should work with meta key as ctrl modifier', () => {
+  it('should accept meta key as ctrl modifier', () => {
     const onPress = vi.fn();
-    renderHook(() =>
+    renderHook(() => {
       useKeyboardShortcut({
         key: 's',
         modifiers: ['ctrl'],
         onPress,
-      })
-    );
+      });
+    });
 
     const event = new KeyboardEvent('keydown', {
       key: 's',
@@ -61,35 +76,38 @@ describe('useKeyboardShortcut', () => {
 
   it('should work with shift modifier', () => {
     const onPress = vi.fn();
-    renderHook(() =>
+    renderHook(() => {
       useKeyboardShortcut({
-        key: 'A',
+        key: 'a',
         modifiers: ['shift'],
         onPress,
-      })
-    );
+      });
+    });
 
-    const event = new KeyboardEvent('keydown', {
+    const eventWithoutShift = new KeyboardEvent('keydown', { key: 'a' });
+    window.dispatchEvent(eventWithoutShift);
+    expect(onPress).not.toHaveBeenCalled();
+
+    const eventWithShift = new KeyboardEvent('keydown', {
       key: 'A',
       shiftKey: true,
     });
-    window.dispatchEvent(event);
-
+    window.dispatchEvent(eventWithShift);
     expect(onPress).toHaveBeenCalledTimes(1);
   });
 
   it('should work with alt modifier', () => {
     const onPress = vi.fn();
-    renderHook(() =>
+    renderHook(() => {
       useKeyboardShortcut({
-        key: 'F',
+        key: 'f',
         modifiers: ['alt'],
         onPress,
-      })
-    );
+      });
+    });
 
     const event = new KeyboardEvent('keydown', {
-      key: 'F',
+      key: 'f',
       altKey: true,
     });
     window.dispatchEvent(event);
@@ -99,16 +117,16 @@ describe('useKeyboardShortcut', () => {
 
   it('should work with multiple modifiers', () => {
     const onPress = vi.fn();
-    renderHook(() =>
+    renderHook(() => {
       useKeyboardShortcut({
-        key: 'K',
+        key: 'k',
         modifiers: ['ctrl', 'shift'],
         onPress,
-      })
-    );
+      });
+    });
 
     const eventWithOnlyCtrl = new KeyboardEvent('keydown', {
-      key: 'K',
+      key: 'k',
       ctrlKey: true,
     });
     window.dispatchEvent(eventWithOnlyCtrl);
@@ -125,12 +143,12 @@ describe('useKeyboardShortcut', () => {
 
   it('should be case insensitive', () => {
     const onPress = vi.fn();
-    renderHook(() =>
+    renderHook(() => {
       useKeyboardShortcut({
         key: 'S',
         onPress,
-      })
-    );
+      });
+    });
 
     const event = new KeyboardEvent('keydown', { key: 's' });
     window.dispatchEvent(event);
@@ -138,38 +156,43 @@ describe('useKeyboardShortcut', () => {
     expect(onPress).toHaveBeenCalledTimes(1);
   });
 
-  it('should prevent default by default', () => {
+  it('should prevent default when shortcut is triggered', () => {
     const onPress = vi.fn();
-    renderHook(() =>
+    renderHook(() => {
       useKeyboardShortcut({
         key: 's',
         modifiers: ['ctrl'],
         onPress,
-      })
-    );
+      });
+    });
 
     const event = new KeyboardEvent('keydown', {
       key: 's',
       ctrlKey: true,
+      cancelable: true,
     });
     const preventDefaultSpy = vi.spyOn(event, 'preventDefault');
 
     window.dispatchEvent(event);
 
     expect(preventDefaultSpy).toHaveBeenCalled();
+    expect(onPress).toHaveBeenCalledTimes(1);
   });
 
   it('should not prevent default when preventDefault is false', () => {
     const onPress = vi.fn();
-    renderHook(() =>
+    renderHook(() => {
       useKeyboardShortcut({
         key: 's',
         onPress,
         preventDefault: false,
-      })
-    );
+      });
+    });
 
-    const event = new KeyboardEvent('keydown', { key: 's' });
+    const event = new KeyboardEvent('keydown', {
+      key: 's',
+      cancelable: true,
+    });
     const preventDefaultSpy = vi.spyOn(event, 'preventDefault');
 
     window.dispatchEvent(event);
@@ -180,12 +203,12 @@ describe('useKeyboardShortcut', () => {
 
   it('should cleanup event listener on unmount', () => {
     const onPress = vi.fn();
-    const { unmount } = renderHook(() =>
+    const { unmount } = renderHook(() => {
       useKeyboardShortcut({
         key: 's',
         onPress,
-      })
-    );
+      });
+    });
 
     unmount();
 

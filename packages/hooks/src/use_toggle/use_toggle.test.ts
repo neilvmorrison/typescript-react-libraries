@@ -93,7 +93,7 @@ describe('useToggle', () => {
       act(() => {
         result.current[1]();
       });
-      expect(result.current[0]).toBe(undefined);
+      expect(result.current[0]).toBe('a');
     });
 
     it('should handle single value array', () => {
@@ -104,7 +104,7 @@ describe('useToggle', () => {
       act(() => {
         result.current[1]();
       });
-      expect(result.current[0]).toBe(undefined);
+      expect(result.current[0]).toBe('only');
     });
 
     it('should handle multiple toggles in array mode', () => {
@@ -118,7 +118,7 @@ describe('useToggle', () => {
         result.current[1]();
       });
 
-      expect(result.current[0]).toBe('red');
+      expect(result.current[0]).toBe('green');
     });
   });
 
