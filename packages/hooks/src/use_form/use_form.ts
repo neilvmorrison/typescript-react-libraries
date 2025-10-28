@@ -34,12 +34,23 @@ export interface IUseFormOptions<T> {
   validate?: (values: T) => Partial<Record<keyof T, string>>;
 }
 
+export type IFormFieldType =
+  | string
+  | number
+  | boolean
+  | Date
+  | File
+  | null
+  | undefined
+  | IFormFieldType[];
+
 export interface IUseFormReturn<T> {
   values: T;
+  dirtyFields: Set<keyof T>;
   errors: Partial<Record<keyof T, string>>;
   isSubmitting: boolean;
   submitAttempts: number;
-  setFieldValue: (field: keyof T, value: unknown) => void;
+  setFieldValue: (field: keyof T, value: IFormFieldType) => void;
   handleChange: (
     event: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
@@ -49,7 +60,7 @@ export interface IUseFormReturn<T> {
   reset: () => void;
   getFormFieldProps: (field: keyof T) => {
     name: keyof T;
-    value: unknown;
+    value: IFormFieldType;
     onChange: (
       event: React.ChangeEvent<
         HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
@@ -57,13 +68,15 @@ export interface IUseFormReturn<T> {
     ) => void;
     error: string | undefined;
   };
+  getFieldValue: (field: keyof T) => IFormFieldType;
 }
 
-export function useForm<T extends Record<string, unknown>>(
+export function useForm<T extends Record<string, IFormFieldType>>(
   options: IUseFormOptions<T>
 ): IUseFormReturn<T> {
   const [values, setValues] = useState<T>(options.initialValues);
   const [errors, setErrors] = useState<Partial<Record<keyof T, string>>>({});
+  const [dirtyFields, setDirtyFields] = useState<Set<keyof T>>(new Set());
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitAttempts, setSubmitAttempts] = useState(0);
 
@@ -78,6 +91,7 @@ export function useForm<T extends Record<string, unknown>>(
           return next;
         });
       }
+      setDirtyFields((prev) => prev.add(field));
     },
     [errors]
   );
@@ -146,8 +160,16 @@ export function useForm<T extends Record<string, unknown>>(
     [values, handleChange, errors]
   );
 
+  const getFieldValue = useCallback(
+    (field: keyof T) => {
+      return values[field];
+    },
+    [values]
+  );
+
   return {
     values,
+    dirtyFields,
     errors,
     isSubmitting,
     submitAttempts,
@@ -156,5 +178,6 @@ export function useForm<T extends Record<string, unknown>>(
     handleSubmit,
     getFormFieldProps,
     reset,
+    getFieldValue,
   };
 }
