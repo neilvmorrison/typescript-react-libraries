@@ -10,6 +10,7 @@
   ],
   "scripts": {
     "dev": "turbo run dev",
+    "dev:docs": "cd packages/docs && npm run dev",
     "build": "turbo run build",
     "test": "vitest",
     "test:ui": "vitest --ui",
@@ -18,7 +19,10 @@
     "lint:fix": "eslint . --ext .ts,.tsx --fix",
     "format": "prettier --write \"**/*.{ts,tsx,json,md}\"",
     "format:check": "prettier --check \"**/*.{ts,tsx,json,md}\"",
-    "docs:generate-types": "ts-node scripts/generate-type-docs.ts"
+    "docs:generate-types": "ts-node scripts/generate-type-docs.ts",
+    "build:components": "cd packages/component-library && npm run build",
+    "build:utilities": "cd packages/utilities && npm run build",
+    "build:hooks": "cd packages/hooks && npm run build"
   },
   "devDependencies": {
     "@eslint/js": "^9.0.0",

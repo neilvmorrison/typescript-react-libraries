@@ -4,3 +4,43 @@
   gap: 1rem;
   align-items: flex-start;
 }
+
+.button-style {
+  background-color: #ff4a55;
+  cursor: pointer;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: #ff404a;
+    cursor: pointer;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  &:active {
+    transform: scale(0.9);
+    transition: all 0.3s ease;
+  }
+
+  &:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+}
