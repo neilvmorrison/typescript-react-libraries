@@ -1,4 +1,4 @@
-export default {
+const meta = {
   index: 'Overview',
   'api-fetch': 'apiFetch',
   'build-page-metadata': 'buildPageMetadata',
@@ -9,3 +9,5 @@ export default {
   throttle: 'Throttle',
   'try-catch': 'tryCatch',
 };
+
+export default meta;

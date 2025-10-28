@@ -1,4 +1,4 @@
-export default {
+const meta = {
   index: 'Overview',
   'use-disclosure': 'useDisclosure',
   'use-event-listener': 'useEventListener',
@@ -8,3 +8,5 @@ export default {
   'use-previous': 'usePrevious',
   'use-toggle': 'useToggle',
 };
+
+export default meta;

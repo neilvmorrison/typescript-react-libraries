@@ -1,0 +1,46 @@
+# Cursor Rules for @libraries
+
+## ESLint Export Patterns
+
+### Default Exports
+
+When exporting default objects, assign to a variable first:
+
+**❌ Incorrect:**
+
+```typescript
+export default {
+  key: 'value',
+};
+```
+
+**✅ Correct:**
+
+```typescript
+const meta = {
+  key: 'value',
+};
+
+export default meta;
+```
+
+This applies to all `_meta.ts` files and any TypeScript/JavaScript file exporting a default object.
+
+## Naming Conventions
+
+- **Interfaces**: Prepend with `I` (e.g., `IButton`, `IFormConfig`)
+- **React components**: Use camelCase (e.g., `useForm`, `useToggle`)
+- **Server-side TypeScript**: Use snake_case (e.g., `api_fetch`, `use_disclosure`)
+- **File names**: Match codebase conventions (kebab-case for routes, snake_case for utilities)
+
+## Type Safety
+
+- Never use `any` type; use specific type definitions or `unknown` as last resort
+- Always define proper types before using them
+- Prefer destructuring React types (e.g., `useEffect` vs `React.useEffect`)
+
+## Code Organization
+
+- CSS modules, components, and tests in their own directories
+- Use named exports for utilities and components (avoid default exports where possible)
+- Minimize inline comments; code should be self-documenting
