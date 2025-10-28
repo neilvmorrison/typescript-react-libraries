@@ -17,8 +17,8 @@ export function App() {
   }, [isDark]);
 
   return (
-    <div className="min-h-screen flex flex-col bg-white dark:bg-slate-950">
-      <header className="border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950">
+    <div className="min-h-screen flex flex-col">
+      <header className="border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900">
         <div className="px-8 py-6 text-center">
           <h1 className="text-4xl font-bold text-slate-950 dark:text-slate-50 mb-2">
             Component Library
