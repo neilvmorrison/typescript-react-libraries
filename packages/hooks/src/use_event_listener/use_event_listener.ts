@@ -47,7 +47,7 @@ export interface IEventMap {
 export function useEventListener<K extends keyof IEventMap>(
   event: K,
   callback: (event: IEventMap[K]) => void
-) {
+): void {
   useEffect(() => {
     window.addEventListener(event, callback as EventListener);
     return () => {

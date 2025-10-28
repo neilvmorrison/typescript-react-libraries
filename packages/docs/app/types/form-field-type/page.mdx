@@ -1,0 +1,152 @@
+# IFormFieldType
+
+Union type representing all supported form field value types in the `useForm` hook.
+
+## Definition
+
+```typescript
+type IFormFieldType =
+  | string
+  | number
+  | boolean
+  | Date
+  | File
+  | null
+  | undefined
+  | IFormFieldType[];
+```
+
+## Supported Types
+
+| Type               | Description                 | Example                     |
+| ------------------ | --------------------------- | --------------------------- |
+| `string`           | Text input value            | `"hello"`                   |
+| `number`           | Numeric input value         | `42`                        |
+| `boolean`          | Checkbox input value        | `true`                      |
+| `Date`             | Date object                 | `new Date('2025-01-15')`    |
+| `File`             | File upload                 | `fileInput.files[0]`        |
+| `null`             | Null value                  | `null`                      |
+| `undefined`        | Undefined value             | `undefined`                 |
+| `IFormFieldType[]` | Array of any supported type | `[1, 2, 3]` or `["a", "b"]` |
+
+## Usage
+
+```typescript
+import { useForm } from '@libraries/hooks';
+
+interface ComplexForm {
+  // String field
+  name: string;
+
+  // Number field
+  age: number;
+
+  // Boolean field
+  subscribe: boolean;
+
+  // Date field
+  birthDate: Date;
+
+  // File field
+  avatar: File | null;
+
+  // Array field
+  tags: string[];
+
+  // Optional field
+  middleName?: string;
+}
+
+const form = useForm<ComplexForm>({
+  initialValues: {
+    name: '',
+    age: 0,
+    subscribe: false,
+    birthDate: new Date(),
+    avatar: null,
+    tags: [],
+  },
+  onSubmit: (values) => {
+    // Handle form submission
+    console.log(values);
+  },
+});
+```
+
+## Common Patterns
+
+### Number Inputs
+
+```typescript
+const form = useForm({
+  initialValues: { quantity: 1 },
+  onSubmit: (values) => {
+    // values.quantity is a number
+  },
+});
+
+<input
+  type="number"
+  {...form.getFormFieldProps('quantity')}
+/>
+```
+
+### Checkboxes
+
+```typescript
+const form = useForm({
+  initialValues: { agreed: false },
+  onSubmit: (values) => {
+    // values.agreed is a boolean
+  },
+});
+
+<input
+  type="checkbox"
+  {...form.getFormFieldProps('agreed')}
+/>
+```
+
+### File Uploads
+
+```typescript
+const form = useForm({
+  initialValues: { file: null },
+  onSubmit: (values) => {
+    // values.file is a File or null
+    if (values.file) {
+      const formData = new FormData();
+      formData.append('file', values.file);
+      // Upload...
+    }
+  },
+});
+
+<input
+  type="file"
+  {...form.getFormFieldProps('file')}
+/>
+```
+
+### Arrays
+
+```typescript
+const form = useForm({
+  initialValues: { tags: [] },
+  onSubmit: (values) => {
+    // values.tags is a string array
+  },
+});
+
+// Add tag
+form.setFieldValue('tags', [...form.values.tags, newTag]);
+```
+
+## Related Types
+
+- [`IUseFormOptions\<T\>`](/types/use-form-options) - Form configuration
+- [`IUseFormReturn\<T\>`](/types/use-form-return) - Form return value
+
+## Used In
+
+- [`useForm`](/hooks/use-form) hook

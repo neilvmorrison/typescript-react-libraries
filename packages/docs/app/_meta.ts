@@ -1,12 +1,10 @@
 const meta = {
-  index: {
-    title: 'Home',
-    display: 'hidden',
-  },
+  index: 'Home',
   introduction: 'Introduction',
   hooks: 'Hooks',
   utilities: 'Utilities',
   components: 'Components',
+  types: 'Types',
 };
 
 export default meta;

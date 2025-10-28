@@ -25,33 +25,148 @@ await api_delete(`/api/users/${userId}`);
 
 ## API Reference
 
-### Functions
+### Import
 
-- `api_fetch(url, options)` - Generic fetch wrapper
-- `api_get(url, options)` - GET request
-- `api_post(url, body, options)` - POST request
-- `api_put(url, body, options)` - PUT request
-- `api_patch(url, body, options)` - PATCH request
-- `api_delete(url, options)` - DELETE request
+```typescript
+import {
+  api_fetch,
+  api_get,
+  api_post,
+  api_put,
+  api_patch,
+  api_delete,
+} from '@libraries/utilities';
+```
 
-### Options
+### api_fetch
 
-- `headers` - Custom headers
-- `signal` - AbortSignal for cancellation
-- `timeout` - Request timeout in milliseconds
+**Parameters**
+
+| Name      | Type                                           | Required | Description                 | Default   |
+| --------- | ---------------------------------------------- | -------- | --------------------------- | --------- |
+| `url`     | `string`                                       | Yes      | URL to fetch from           | N/A       |
+| `options` | [`IApiFetchOptions`](/types/api-fetch-options) | No       | Fetch configuration options | undefined |
+
+**Returns**
+
+| Name     | Type                             | Description                               |
+| -------- | -------------------------------- | ----------------------------------------- |
+| (result) | `Promise<IResult<T, IApiError>>` | Promise resolving to either data or error |
+
+### Related Types
+
+- [`IApiFetchOptions`](/types/api-fetch-options) - Request configuration
+- [`IApiError`](/types/api-error) - Error structure
+- [`IResult<T, E>`](/types/result) - Result type
+
+### api_get
+
+**Parameters**
+
+| Name      | Type               | Required | Description                 | Default   |
+| --------- | ------------------ | -------- | --------------------------- | --------- |
+| `url`     | `string`           | Yes      | URL to fetch from           | N/A       |
+| `options` | `IApiFetchOptions` | No       | Fetch configuration options | undefined |
+
+**Returns**
+
+| Name     | Type                             | Description                               |
+| -------- | -------------------------------- | ----------------------------------------- |
+| (result) | `Promise<IResult<T, IApiError>>` | Promise resolving to either data or error |
+
+### api_post
+
+**Parameters**
+
+| Name      | Type               | Required | Description                 | Default   |
+| --------- | ------------------ | -------- | --------------------------- | --------- |
+| `url`     | `string`           | Yes      | URL to fetch from           | N/A       |
+| `body`    | `unknown`          | No       | Request body data           | undefined |
+| `options` | `IApiFetchOptions` | No       | Fetch configuration options | undefined |
+
+**Returns**
+
+| Name     | Type                             | Description                               |
+| -------- | -------------------------------- | ----------------------------------------- |
+| (result) | `Promise<IResult<T, IApiError>>` | Promise resolving to either data or error |
+
+### api_put
+
+**Parameters**
+
+| Name      | Type               | Required | Description                 | Default   |
+| --------- | ------------------ | -------- | --------------------------- | --------- |
+| `url`     | `string`           | Yes      | URL to fetch from           | N/A       |
+| `body`    | `unknown`          | No       | Request body data           | undefined |
+| `options` | `IApiFetchOptions` | No       | Fetch configuration options | undefined |
+
+**Returns**
+
+| Name     | Type                             | Description                               |
+| -------- | -------------------------------- | ----------------------------------------- |
+| (result) | `Promise<IResult<T, IApiError>>` | Promise resolving to either data or error |
+
+### api_patch
+
+**Parameters**
+
+| Name      | Type               | Required | Description                 | Default   |
+| --------- | ------------------ | -------- | --------------------------- | --------- |
+| `url`     | `string`           | Yes      | URL to fetch from           | N/A       |
+| `body`    | `unknown`          | No       | Request body data           | undefined |
+| `options` | `IApiFetchOptions` | No       | Fetch configuration options | undefined |
+
+**Returns**
+
+| Name     | Type                             | Description                               |
+| -------- | -------------------------------- | ----------------------------------------- |
+| (result) | `Promise<IResult<T, IApiError>>` | Promise resolving to either data or error |
+
+### api_delete
+
+**Parameters**
+
+| Name      | Type               | Required | Description                 | Default   |
+| --------- | ------------------ | -------- | --------------------------- | --------- |
+| `url`     | `string`           | Yes      | URL to fetch from           | N/A       |
+| `options` | `IApiFetchOptions` | No       | Fetch configuration options | undefined |
+
+**Returns**
+
+| Name     | Type                             | Description                               |
+| -------- | -------------------------------- | ----------------------------------------- |
+| (result) | `Promise<IResult<T, IApiError>>` | Promise resolving to either data or error |
+
+### IApiFetchOptions
+
+Extends standard `RequestInit` with additional properties:
+
+| Name            | Type      | Description                                       |
+| --------------- | --------- | ------------------------------------------------- |
+| `body`          | `unknown` | Request body (automatically serialized)           |
+| `parseResponse` | `boolean` | Whether to parse response as JSON (default: true) |
 
 ### Error Handling
 
-All functions return a result object:
+All functions return a `IResult<T, IApiError>` object:
 
 ```typescript
-interface IResult<T> {
-  data?: T;
-  error?: IApiError;
+interface ISuccess<T> {
+  data: T;
+  error: null;
 }
 
-class ApiError extends Error {
-  status: number;
-  data: unknown;
+interface IError<E> {
+  data: null;
+  error: E;
 }
+
+type IResult<T, E = unknown> = ISuccess<T> | IError<E>;
 ```
+
+**IApiError structure:**
+
+| Property | Type | Description |
+| -------- | ---- | ----------- |
+
+| `

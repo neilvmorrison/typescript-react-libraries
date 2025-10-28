@@ -1,0 +1,119 @@
+# IUseFormReturn\<T\>
+
+Return value of the `useForm` hook. Contains form state and handlers for managing form submissions and field values.
+
+## Definition
+
+```typescript
+interface IUseFormReturn<T> {
+  values: T;
+  dirtyFields: Set<keyof T>;
+  errors: Partial<Record<keyof T, string>>;
+  isSubmitting: boolean;
+  submitAttempts: number;
+  setFieldValue: (field: keyof T, value: IFormFieldType) => void;
+  handleChange: (
+    event: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => void;
+  handleSubmit: (event: React.FormEvent<HTMLFormElement>) => Promise<void>;
+  reset: () => void;
+  getFormFieldProps: (field: keyof T) => FormFieldProps;
+  getFieldValue: (field: keyof T) => IFormFieldType;
+}
+```
+
+## Properties
+
+| Property         | Type                               | Description                           |
+| ---------------- | ---------------------------------- | ------------------------------------- |
+| `values`         | `T`                                | Current form field values             |
+| `errors`         | `Partial<Record<keyof T, string>>` | Validation errors by field name       |
+| `isSubmitting`   | `boolean`                          | Whether form is currently submitting  |
+| `dirtyFields`    | `Set<keyof T>`                     | Set of fields that have been modified |
+| `submitAttempts` | `number`                           | Number of submit attempts made        |
+
+## Methods
+
+| Method              | Signature                                                    | Description                           |
+| ------------------- | ------------------------------------------------------------ | ------------------------------------- |
+| `handleChange`      | `(event: React.ChangeEvent<...>) => void`                    | Event handler for input changes       |
+| `handleSubmit`      | `(event: React.FormEvent<HTMLFormElement>) => Promise<void>` | Form submission handler               |
+| `setFieldValue`     | `(field: keyof T, value: IFormFieldType) => void`            | Programmatically set a field value    |
+| `reset`             | `() => void`                                                 | Reset form to initial values          |
+| `getFormFieldProps` | `(field: keyof T) => FormFieldProps`                         | Get bound props object for an input   |
+| `getFieldValue`     | `(field: keyof T) => IFormFieldType`                         | Get current value of a specific field |
+
+## Type Parameters
+
+| Name | Description          |
+| ---- | -------------------- |
+| `T`  | The form values type |
+
+## Usage
+
+```typescript
+import { useForm } from '@libraries/hooks';
+
+interface SignupForm {
+  username: string;
+  email: string;
+  acceptTerms: boolean;
+}
+
+export function SignupPage() {
+  const form = useForm<SignupForm>({
+    initialValues: {
+      username: '',
+      email: '',
+      acceptTerms: false,
+    },
+    onSubmit: async (values) => {
+      await api_post('/api/signup', values);
+    },
+  });
+
+  return (
+    <form onSubmit={form.handleSubmit}>
+      <input
+        {...form.getFormFieldProps('username')}
+        placeholder="Username"
+      />
+      {form.errors.username && (
+        <span className="error">{form.errors.username}</span>
+      )}
+
+      <input
+        {...form.getFormFieldProps('email')}
+        type="email"
+        placeholder="Email"
+      />
+      {form.errors.email && (
+        <span className="error">{form.errors.email}</span>
+      )}
+
+      <label>
+        <input
+          {...form.getFormFieldProps('acceptTerms')}
+          type="checkbox"
+        />
+        I accept the terms
+      </label>
+
+      <button type="submit" disabled={form.isSubmitting}>
+        {form.isSubmitting ? 'Submitting...' : 'Sign Up'}
+      </button>
+    </form>
+  );
+}
+```
+
+## Related Types
+
+- [`IUseFormOptions\<T\>`](/types/use-form-options) - Form configuration
+- [`IFormFieldType`](/types/form-field-type) - Supported field types
+
+## Used In
+
+- [`useForm`](/hooks/use-form)

@@ -1,8 +1,13 @@
 import { useCallback, useState } from 'react';
 
+export type IUseToggleReturn<T extends boolean | string[] = boolean> = [
+  T extends boolean ? boolean : string,
+  () => void,
+];
+
 export function useToggle(
   initialValue: boolean | string[]
-): [boolean | string, () => void] {
+): IUseToggleReturn<typeof initialValue> {
   const [toggleIndex, setToggleIndex] = useState<number>(0);
   const [value, setValue] = useState<boolean | string>(
     typeof initialValue === 'boolean' ? initialValue : initialValue[0]

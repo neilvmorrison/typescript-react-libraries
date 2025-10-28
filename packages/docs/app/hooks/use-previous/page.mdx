@@ -21,10 +21,20 @@ export function ValueDisplay({ value }: { value: number }) {
 
 ## API Reference
 
+### Import
+
+```typescript
+import { usePrevious } from '@libraries/hooks';
+```
+
 ### Parameters
 
-- `value` - The value to track
+| Name    | Type | Required | Description        | Default |
+| ------- | ---- | -------- | ------------------ | ------- |
+| `value` | `T`  | Yes      | The value to track | N/A     |
 
 ### Returns
 
-- `previousValue` - The previous value from the last render
+| Name          | Type             | Description                                                         |
+| ------------- | ---------------- | ------------------------------------------------------------------- |
+| previousValue | `T \| undefined` | The previous value from the last render (undefined on first render) |

@@ -8,9 +8,13 @@ Handle keyboard shortcuts and key combinations in your components.
 import { useKeyboardShortcut } from '@libraries/hooks';
 
 export function Editor() {
-  useKeyboardShortcut(['ctrl', 's'], () => {
-    console.log('Save triggered');
-    // Handle save
+  useKeyboardShortcut({
+    key: 's',
+    modifiers: ['ctrl'],
+    onPress: () => {
+      console.log('Save triggered');
+      // Handle save
+    },
   });
 
   return <div>Press Ctrl+S to save</div>;
@@ -19,15 +23,36 @@ export function Editor() {
 
 ## API Reference
 
+### Import
+
+```typescript
+import { useKeyboardShortcut } from '@libraries/hooks';
+```
+
 ### Parameters
 
-- `keys` - Array of key modifiers and key ('ctrl', 'shift', 'alt', or specific key)
-- `callback` - Function to execute when the shortcut is triggered
-- `options` - Optional configuration object
+| Name      | Type                          | Required | Description                            | Default |
+| --------- | ----------------------------- | -------- | -------------------------------------- | ------- |
+| `options` | `IUseKeyboardShortcutOptions` | Yes      | Keyboard shortcut configuration object | N/A     |
+
+**Options Details:**
+
+| Name             | Type            | Required | Description                                           | Default   |
+| ---------------- | --------------- | -------- | ----------------------------------------------------- | --------- |
+| `key`            | `string`        | Yes      | The key to listen for (e.g., 's', 'Enter')            | N/A       |
+| `modifiers`      | `KeyModifier[]` | No       | Array of modifiers: 'ctrl', 'shift', 'alt', 'meta'    | undefined |
+| `onPress`        | `() => void`    | Yes      | Callback function executed when shortcut is triggered | N/A       |
+| `preventDefault` | `boolean`       | No       | Whether to prevent default browser behavior           | true      |
+
+### Returns
+
+| Name   | Type   | Description                                         |
+| ------ | ------ | --------------------------------------------------- |
+| (void) | `void` | No return value; automatically cleans up on unmount |
 
 ### Supported Modifiers
 
-- `'ctrl'` - Control key
+- `'ctrl'` - Control key (or Command on Mac)
 - `'shift'` - Shift key
 - `'alt'` - Alt key
 - `'meta'` - Command key (Mac) / Windows key

@@ -1,0 +1,115 @@
+import { LiveExample } from './live-example';
+
+# Button
+
+Flexible button component with multiple variants and sizes, supporting all standard HTML button attributes.
+
+## Usage
+
+```typescript
+import { Button } from '@libraries/component-library';
+
+export function Example() {
+  return (
+    <div>
+      <Button>Default Button</Button>
+      <Button variant="primary">Primary Button</Button>
+      <Button variant="danger" size="lg">
+        Delete
+      </Button>
+    </div>
+  );
+}
+```
+
+## Live Example
+
+<LiveExample />
+
+## API Reference
+
+### Import
+
+```typescript
+import { Button } from '@libraries/component-library';
+```
+
+### Props
+
+| Name       | Type                                                             | Required | Description                        | Default     |
+| ---------- | ---------------------------------------------------------------- | -------- | ---------------------------------- | ----------- |
+| `variant`  | `'primary' \| 'secondary' \| 'danger' \| 'success' \| 'warning'` | No       | Button style variant               | `'primary'` |
+| `size`     | `'sm' \| 'md' \| 'lg'`                                           | No       | Button size                        | `'md'`      |
+| `ref`      | `React.Ref<HTMLButtonElement>`                                   | No       | Forward ref to HTML button element | N/A         |
+| `children` | `React.ReactNode`                                                | No       | Button content                     | N/A         |
+| `...props` | `ButtonHTMLAttributes<HTMLButtonElement>`                        | No       | Standard HTML button attributes    | N/A         |
+
+### Variants
+
+- `'primary'` - Primary action button
+- `'secondary'` - Secondary action button
+- `'danger'` - Destructive action button
+- `'success'` - Success/confirmation button
+- `'warning'` - Warning/caution button
+
+### Sizes
+
+- `'sm'` - Small button
+- `'md'` - Medium button (default)
+- `'lg'` - Large button
+
+## Examples
+
+### Basic Usage
+
+```typescript
+<Button>Click me</Button>
+```
+
+### Variants
+
+```typescript
+<Button variant="primary">Primary</Button>
+<Button variant="secondary">Secondary</Button>
+<Button variant="danger">Delete</Button>
+<Button variant="success">Confirm</Button>
+<Button variant="warning">Warning</Button>
+```
+
+### Sizes
+
+```typescript
+<Button size="sm">Small</Button>
+<Button size="md">Medium</Button>
+<Button size="lg">Large</Button>
+```
+
+### With HTML Attributes
+
+```typescript
+<Button
+  variant="primary"
+  size="lg"
+  disabled={false}
+  onClick={() => console.log('Clicked')}
+  type="submit"
+>
+  Submit Form
+</Button>
+```
+
+### With Ref
+
+```typescript
+import { useRef } from 'react';
+
+export function ButtonWithRef() {
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
+  return (
+    <Button ref={buttonRef} onClick={() => buttonRef.current?.focus()}>
+      Focus me
+    </Button>
+  );
+}
+```

@@ -8,7 +8,7 @@ Sync component state with browser localStorage.
 import { useLocalStorage } from '@libraries/hooks';
 
 export function Counter() {
-  const [count, setCount] = useLocalStorage('count', 0);
+  const { value: count, setValue: setCount } = useLocalStorage('count', 0);
 
   return (
     <div>
@@ -21,12 +21,23 @@ export function Counter() {
 
 ## API Reference
 
+### Import
+
+```typescript
+import { useLocalStorage } from '@libraries/hooks';
+```
+
 ### Parameters
 
-- `key` - localStorage key to use
-- `initialValue` - Initial value if key doesn't exist in storage
+| Name           | Type     | Required | Description                                   | Default |
+| -------------- | -------- | -------- | --------------------------------------------- | ------- |
+| `key`          | `string` | Yes      | localStorage key to use                       | N/A     |
+| `initialValue` | `T`      | Yes      | Initial value if key doesn't exist in storage | N/A     |
 
 ### Returns
 
-- `value` - Current stored value
-- `setValue` - Function to update the stored value
+| Name          | Type                                        | Description                                                      |
+| ------------- | ------------------------------------------- | ---------------------------------------------------------------- |
+| `value`       | `T`                                         | Current stored value                                             |
+| `setValue`    | `(value: T \| ((current: T) => T)) => void` | Function to update the stored value                              |
+| `removeValue` | `() => void`                                | Function to remove value from storage and reset to initial value |

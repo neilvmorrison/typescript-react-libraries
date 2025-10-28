@@ -1,0 +1,111 @@
+# IApiError
+
+Error object returned when API fetch operations fail. Provides detailed information about what went wrong.
+
+## Definition
+
+```typescript
+interface IApiError {
+  status: number;
+  statusText: string;
+  message: string;
+  url: string;
+}
+
+class ApiError extends Error implements IApiError {
+  status: number;
+  statusText: string;
+  url: string;
+
+  constructor(status: number, statusText: string, message: string, url: string);
+}
+```
+
+## Properties
+
+| Property     | Type     | Description                                         |
+| ------------ | -------- | --------------------------------------------------- |
+| `status`     | `number` | HTTP status code (e.g., 404, 500)                   |
+| `statusText` | `string` | HTTP status text (e.g., "Not Found")                |
+| `message`    | `string` | Error message from the response body or HTTP status |
+| `url`        | `string` | The requested URL that failed                       |
+
+## Usage
+
+```typescript
+import { api_fetch } from '@libraries/utilities';
+
+const result = await api_fetch('/api/users/123');
+
+if (result.error) {
+  const error = result.error;
+
+  console.error(`Request failed: ${error.statusText}`);
+  console.error(`Status: ${error.status}`);
+  console.error(`URL: ${error.url}`);
+  console.error(`Message: ${error.message}`);
+
+  // Handle specific status codes
+  switch (error.status) {
+    case 404:
+      console.log('Resource not found');
+      break;
+    case 401:
+      console.log('Unauthorized - redirect to login');
+      break;
+    case 500:
+      console.log('Server error - try again later');
+      break;
+  }
+}
+```
+
+## Type Guards
+
+```typescript
+import { ApiError } from '@libraries/utilities';
+
+async function makeRequest() {
+  const result = await api_fetch('/api/data');
+
+  if (result.error) {
+    // result.error is typed as IApiError
+    if (result.error instanceof ApiError) {
+      // Can access ApiError-specific properties
+      console.log(result.error.status);
+    }
+  }
+}
+```
+
+## HTTP Status Codes
+
+Common status codes you'll encounter:
+
+| Status | StatusText            | Meaning                             |
+| ------ | --------------------- | ----------------------------------- |
+| 200    | OK                    | Success                             |
+| 201    | Created               | Resource created successfully       |
+| 204    | No Content            | Success with no response body       |
+| 400    | Bad Request           | Invalid request data                |
+| 401    | Unauthorized          | Authentication required             |
+| 403    | Forbidden             | Access denied                       |
+| 404    | Not Found             | Resource doesn't exist              |
+| 409    | Conflict              | Resource conflict (e.g., duplicate) |
+| 429    | Too Many Requests     | Rate limited                        |
+| 500    | Internal Server Error | Server error                        |
+| 503    | Service Unavailable   | Server temporarily down             |
+
+## Related Types
+
+- [`IApiFetchOptions`](/types/api-fetch-options) - Fetch configuration
+- [`IResult\<T, E\>`](/types/result) - Result type
+
+## Used In
+
+- [`api_fetch`](/utilities/api-fetch)
+- [`api_get`](/utilities/api-fetch)
+- [`api_post`](/utilities/api-fetch)
+- [`api_put`](/utilities/api-fetch)
+- [`api_patch`](/utilities/api-fetch)
+- [`api_delete`](/utilities/api-fetch)

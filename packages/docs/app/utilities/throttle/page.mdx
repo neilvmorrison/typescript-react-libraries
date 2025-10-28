@@ -16,14 +16,24 @@ window.addEventListener('scroll', handleScroll);
 
 ## API Reference
 
+### Import
+
+```typescript
+import { throttle } from '@libraries/utilities';
+```
+
 ### Parameters
 
-- `fn` - Function to throttle
-- `limit` - Time interval in milliseconds
+| Name    | Type                             | Required | Description                                      | Default |
+| ------- | -------------------------------- | -------- | ------------------------------------------------ | ------- |
+| `fn`    | `T extends (...args) => unknown` | Yes      | Function to throttle                             | N/A     |
+| `delay` | `number`                         | Yes      | Time interval in milliseconds between executions | N/A     |
 
 ### Returns
 
-A throttled function that executes at most once per interval.
+| Name        | Type                               | Description                                                  |
+| ----------- | ---------------------------------- | ------------------------------------------------------------ |
+| (throttled) | `(...args: Parameters<T>) => void` | A throttled function that executes at most once per interval |
 
 ## Differences from Debounce
 

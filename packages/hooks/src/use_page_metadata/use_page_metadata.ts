@@ -4,7 +4,7 @@ import {
   type IBuildPageMetadataConfig,
 } from '@libraries/utilities';
 
-export function usePageMetadata(options: IBuildPageMetadataConfig) {
+export function usePageMetadata(options: IBuildPageMetadataConfig): void {
   const metadata = build_page_metadata(options);
 
   useEffect(() => {

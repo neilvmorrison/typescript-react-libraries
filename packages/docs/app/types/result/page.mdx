@@ -1,0 +1,90 @@
+# IResult\<T, E\>
+
+Generic result type for error handling. Represents either a success with data or an error.
+
+## Definition
+
+```typescript
+interface ISuccess<T> {
+  data: T;
+  error: null;
+}
+
+interface IError<E> {
+  data: null;
+  error: E;
+}
+
+type IResult<T, E = unknown> = ISuccess<T> | IError<E>;
+```
+
+## Type Parameters
+
+| Name | Description                            |
+| ---- | -------------------------------------- |
+| `T`  | The success data type                  |
+| `E`  | The error type (defaults to `unknown`) |
+
+## Variants
+
+### ISuccess\<T\>
+
+Represents a successful operation.
+
+| Property | Type   | Description                     |
+| -------- | ------ | ------------------------------- |
+| `data`   | `T`    | The successful result data      |
+| `error`  | `null` | Always null to indicate success |
+
+### IError\<E\>
+
+Represents a failed operation.
+
+| Property | Type   | Description                   |
+| -------- | ------ | ----------------------------- |
+| `data`   | `null` | Always null to indicate error |
+| `error`  | `E`    | The error details             |
+
+## Usage
+
+```typescript
+import { try_catch } from '@libraries/utilities';
+
+// Returns IResult<User, Error>
+const result = await try_catch(async () => {
+  const response = await fetch('/api/user');
+  return response.json();
+});
+
+if (result.error) {
+  console.error('Failed:', result.error);
+} else {
+  console.log('User:', result.data);
+}
+```
+
+## Type Guards
+
+Use discriminated unions for type-safe handling:
+
+```typescript
+function handleResult<T, E>(result: IResult<T, E>): void {
+  if (result.error === null) {
+    // result is ISuccess<T> - data is available
+    console.log(result.data);
+  } else {
+    // result is IError<E> - error is available
+    console.error(result.error);
+  }
+}
+```
+
+## Used In
+
+- [`try_catch`](/utilities/try-catch)
+- [`api_fetch`](/utilities/api-fetch)
+- [`api_get`](/utilities/api-fetch)
+- [`api_post`](/utilities/api-fetch)
+- [`api_put`](/utilities/api-fetch)
+- [`api_patch`](/utilities/api-fetch)
+- [`api_delete`](/utilities/api-fetch)

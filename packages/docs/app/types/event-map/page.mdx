@@ -1,0 +1,179 @@
+# IEventMap
+
+Comprehensive type mapping for all supported DOM events in the `useEventListener` hook. Provides type-safe event handling with proper event object typing.
+
+## Definition
+
+The `IEventMap` interface maps event names to their corresponding event types:
+
+```typescript
+interface IEventMap {
+  click: MouseEvent;
+  dblclick: MouseEvent;
+  mousedown: MouseEvent;
+  mouseup: MouseEvent;
+  mousemove: MouseEvent;
+  mouseover: MouseEvent;
+  mouseout: MouseEvent;
+  mouseenter: MouseEvent;
+  mouseleave: MouseEvent;
+  keydown: KeyboardEvent;
+  keyup: KeyboardEvent;
+  keypress: KeyboardEvent;
+  focus: FocusEvent;
+  blur: FocusEvent;
+  change: Event;
+  input: Event;
+  submit: SubmitEvent;
+  reset: Event;
+  scroll: Event;
+  resize: UIEvent;
+  load: Event;
+  unload: Event;
+  beforeunload: BeforeUnloadEvent;
+  error: ErrorEvent;
+  // ... and more
+}
+```
+
+## Supported Events
+
+### Mouse Events
+
+| Event         | Type         | Description                 |
+| ------------- | ------------ | --------------------------- |
+| `click`       | `MouseEvent` | Element clicked             |
+| `dblclick`    | `MouseEvent` | Element double-clicked      |
+| `mousedown`   | `MouseEvent` | Mouse button pressed        |
+| `mouseup`     | `MouseEvent` | Mouse button released       |
+| `mousemove`   | `MouseEvent` | Mouse moved                 |
+| `mouseover`   | `MouseEvent` | Mouse entered element       |
+| `mouseout`    | `MouseEvent` | Mouse left element          |
+| `mouseenter`  | `MouseEvent` | Mouse entered (no bubbling) |
+| `mouseleave`  | `MouseEvent` | Mouse left (no bubbling)    |
+| `contextmenu` | `MouseEvent` | Right-click context menu    |
+| `wheel`       | `WheelEvent` | Mouse wheel scrolled        |
+
+### Keyboard Events
+
+| Event      | Type            | Description              |
+| ---------- | --------------- | ------------------------ |
+| `keydown`  | `KeyboardEvent` | Key pressed              |
+| `keyup`    | `KeyboardEvent` | Key released             |
+| `keypress` | `KeyboardEvent` | Key pressed (deprecated) |
+
+### Form Events
+
+| Event    | Type          | Description        |
+| -------- | ------------- | ------------------ |
+| `change` | `Event`       | Form value changed |
+| `input`  | `Event`       | Input text entered |
+| `submit` | `SubmitEvent` | Form submitted     |
+| `reset`  | `Event`       | Form reset         |
+
+### Focus Events
+
+| Event   | Type         | Description        |
+| ------- | ------------ | ------------------ |
+| `focus` | `FocusEvent` | Element focused    |
+| `blur`  | `FocusEvent` | Element lost focus |
+
+### Touch Events
+
+| Event         | Type         | Description     |
+| ------------- | ------------ | --------------- |
+| `touchstart`  | `TouchEvent` | Touch started   |
+| `touchend`    | `TouchEvent` | Touch ended     |
+| `touchmove`   | `TouchEvent` | Touch moved     |
+| `touchcancel` | `TouchEvent` | Touch cancelled |
+
+### Pointer Events
+
+| Event          | Type           | Description      |
+| -------------- | -------------- | ---------------- |
+| `pointerdown`  | `PointerEvent` | Pointer pressed  |
+| `pointerup`    | `PointerEvent` | Pointer released |
+| `pointermove`  | `PointerEvent` | Pointer moved    |
+| `pointerenter` | `PointerEvent` | Pointer entered  |
+| `pointerleave` | `PointerEvent` | Pointer left     |
+
+### UI Events
+
+| Event          | Type                | Description       |
+| -------------- | ------------------- | ----------------- |
+| `scroll`       | `Event`             | Element scrolled  |
+| `resize`       | `UIEvent`           | Window resized    |
+| `load`         | `Event`             | Resource loaded   |
+| `unload`       | `Event`             | Resource unloaded |
+| `beforeunload` | `BeforeUnloadEvent` | Before unload     |
+
+### Other Events
+
+| Event              | Type            | Description             |
+| ------------------ | --------------- | ----------------------- |
+| `error`            | `ErrorEvent`    | Error occurred          |
+| `abort`            | `ProgressEvent` | Operation aborted       |
+| `progress`         | `ProgressEvent` | Operation progress      |
+| `visibilitychange` | `Event`         | Page visibility changed |
+| `fullscreenchange` | `Event`         | Fullscreen toggled      |
+
+## Usage
+
+```typescript
+import { useEventListener } from '@libraries/hooks';
+
+export function KeyLogger() {
+  // Event type is automatically inferred
+  useEventListener('keydown', (event) => {
+    // event is KeyboardEvent - has key, code, etc.
+    console.log(`Key pressed: ${event.key}`);
+  });
+
+  return <div>Press any key (check console)</div>;
+}
+
+export function ClickCounter() {
+  let clickCount = 0;
+
+  useEventListener('click', (event) => {
+    // event is MouseEvent - has clientX, clientY, etc.
+    console.log(`Clicked at ${event.clientX}, ${event.clientY}`);
+    clickCount++;
+  });
+
+  return <div>Click anywhere (count: {clickCount})</div>;
+}
+
+export function ResizeListener() {
+  useEventListener('resize', (event) => {
+    // event is UIEvent
+    console.log(`Window resized to ${window.innerWidth}x${window.innerHeight}`);
+  });
+
+  return <div>Resize the window</div>;
+}
+```
+
+## Type Safety
+
+The `IEventMap` ensures type-safe event handling:
+
+```typescript
+// ✅ Correct: KeyboardEvent has 'key' property
+useEventListener('keydown', (event) => {
+  console.log(event.key); // Works!
+});
+
+// ❌ Error: MouseEvent doesn't have 'key'
+useEventListener('click', (event) => {
+  console.log(event.key); // TypeScript error!
+});
+```
+
+## Related Types
+
+- Event interfaces from the DOM standard library
+
+## Used In
+
+- [`useEventListener`](/hooks/use-event-listener)

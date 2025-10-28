@@ -15,15 +15,25 @@ clamp(100, 50, 100); // Returns 100
 
 ## API Reference
 
+### Import
+
+```typescript
+import { clamp } from '@libraries/utilities';
+```
+
 ### Parameters
 
-- `value` - The number to constrain
-- `min` - Minimum allowed value
-- `max` - Maximum allowed value
+| Name    | Type     | Required | Description             | Default |
+| ------- | -------- | -------- | ----------------------- | ------- |
+| `value` | `number` | Yes      | The number to constrain | N/A     |
+| `min`   | `number` | Yes      | Minimum allowed value   | N/A     |
+| `max`   | `number` | Yes      | Maximum allowed value   | N/A     |
 
 ### Returns
 
-The constrained number within the specified range.
+| Name     | Type     | Description                                       |
+| -------- | -------- | ------------------------------------------------- |
+| (result) | `number` | The constrained number within the specified range |
 
 ## Common Use Cases
 

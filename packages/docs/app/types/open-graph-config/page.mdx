@@ -1,0 +1,85 @@
+# IOpenGraphConfig
+
+Open Graph metadata configuration for social media sharing. Used by platforms like Facebook, Twitter, LinkedIn, etc.
+
+## Definition
+
+```typescript
+type IOgType = 'website' | 'article' | 'product' | 'book' | 'profile';
+
+interface IOpenGraphConfig {
+  title: string;
+  description: string;
+  url?: string;
+  type: IOgType;
+  images?: IOpenGraphImage[];
+  videos?: IOpenGraphVideo[];
+  locale?: string;
+  site_name?: string;
+  profile?: IOpenGraphProfile;
+  article?: IOpenGraphArticle;
+}
+```
+
+## Properties
+
+| Property      | Type                | Description                                                      |
+| ------------- | ------------------- | ---------------------------------------------------------------- |
+| `title`       | `string`            | OG title (can differ from page title)                            |
+| `description` | `string`            | OG description                                                   |
+| `type`        | `IOgType`           | Content type: 'website', 'article', 'product', 'book', 'profile' |
+| `url`         | `string`            | Canonical URL for sharing                                        |
+| `images`      | `IOpenGraphImage[]` | Array of share images                                            |
+| `videos`      | `IOpenGraphVideo[]` | Array of share videos                                            |
+| `locale`      | `string`            | Locale (e.g., 'en_US')                                           |
+| `site_name`   | `string`            | Website name                                                     |
+| `profile`     | `IOpenGraphProfile` | Profile info (for profile type)                                  |
+| `article`     | `IOpenGraphArticle` | Article info (for article type)                                  |
+
+## Usage
+
+```typescript
+import { build_page_metadata } from '@libraries/utilities';
+
+export const metadata = build_page_metadata({
+  title: 'My Blog Post',
+  description: 'An interesting blog post',
+  canonical_url: 'https://example.com/blog/post',
+
+  og: {
+    type: 'article',
+    title: 'Check out this article!',
+    description: "You won't believe this...",
+    url: 'https://example.com/blog/post',
+    images: [
+      {
+        url: 'https://example.com/og-image-large.jpg',
+        width: 1200,
+        height: 630,
+        type: 'image/jpeg',
+      },
+    ],
+    site_name: 'My Blog',
+  },
+});
+```
+
+## Open Graph Types
+
+| Type      | Best For             | Required Fields                                 |
+| --------- | -------------------- | ----------------------------------------------- |
+| `website` | General web pages    | title, description, url, images                 |
+| `article` | Blog posts, news     | title, description, url, images, published_time |
+| `product` | E-commerce items     | title, description, url, images                 |
+| `book`    | Books                | title, description, url, images                 |
+| `profile` | User/author profiles | title, description, profile properties          |
+
+## Related Types
+
+- [`IBuildPageMetadataConfig`](/types/page-metadata-config) - Config input
+- [`IBuildPageMetadataReturn`](/types/page-metadata-return) - Return type
+- [`ITwitterConfig`](/types/twitter-config) - Twitter metadata
+
+## Used In
+
+- [`build_page_metadata`](/utilities/build-page-metadata)

@@ -21,21 +21,41 @@ if (result.error) {
 
 ## API Reference
 
+### Import
+
+```typescript
+import { try_catch } from '@libraries/utilities';
+```
+
 ### Parameters
 
-- `fn` - Function to execute (sync or async)
+| Name | Type               | Required | Description                   | Default |
+| ---- | ------------------ | -------- | ----------------------------- | ------- |
+| `fn` | `() => Promise<T>` | Yes      | The async function to execute | N/A     |
 
 ### Returns
 
-```typescript
-interface IResult<T> {
-  data?: T;
-  error?: IError;
-}
+| Name     | Type            | Description                                                        |
+| -------- | --------------- | ------------------------------------------------------------------ |
+| (result) | `IResult<T, E>` | A promise that resolves to either a success or error result object |
 
-interface IError {
-  message: string;
-  cause?: unknown;
+### Result Structure
+
+**Success:**
+
+```typescript
+{
+  data: T;
+  error: null;
+}
+```
+
+**Error:**
+
+```typescript
+{
+  data: null;
+  error: E;
 }
 ```
 

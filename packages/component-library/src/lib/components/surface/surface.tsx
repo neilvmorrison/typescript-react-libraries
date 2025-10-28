@@ -1,6 +1,10 @@
-import { forwardRef } from 'react';
+import { forwardRef, HTMLAttributes, ReactNode } from 'react';
 
-export const Surface = forwardRef<HTMLDivElement, HTMLDivElement>(
+interface ISurfaceProps extends HTMLAttributes<HTMLDivElement> {
+  children?: ReactNode;
+}
+
+export const Surface = forwardRef<HTMLDivElement, ISurfaceProps>(
   ({ children, ...props }, ref) => {
     return (
       <div ref={ref} {...props}>

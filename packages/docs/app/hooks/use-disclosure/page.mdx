@@ -8,7 +8,7 @@ Control open/close state for modals, drawers, and similar components.
 import { useDisclosure } from '@libraries/hooks';
 
 export function ModalExample() {
-  const { isOpen, open, close, toggle } = useDisclosure();
+  const { isOpen, open, close, toggle } = useDisclosure(false);
 
   return (
     <>
@@ -26,9 +26,27 @@ export function ModalExample() {
 
 ## API Reference
 
+### Import
+
+```typescript
+import { useDisclosure } from '@libraries/hooks';
+```
+
+### Parameters
+
+| Name           | Type      | Required | Description           | Default |
+| -------------- | --------- | -------- | --------------------- | ------- |
+| `defaultValue` | `boolean` | No       | Initial boolean value | `false` |
+
 ### Returns
 
-- `isOpen` - Boolean indicating if disclosure is open
-- `open` - Function to open the disclosure
-- `close` - Function to close the disclosure
-- `toggle` - Function to toggle the disclosure
+| Name     | Type         | Description                              |
+| -------- | ------------ | ---------------------------------------- |
+| `value`  | `boolean`    | Boolean indicating if disclosure is open |
+| `open`   | `() => void` | Function to open the disclosure          |
+| `close`  | `() => void` | Function to close the disclosure         |
+| `toggle` | `() => void` | Function to toggle the disclosure        |
+
+### External Dependencies
+
+None

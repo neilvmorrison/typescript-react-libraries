@@ -1,0 +1,79 @@
+# IBuildPageMetadataConfig
+
+Configuration object for the `build_page_metadata` utility. Specifies SEO and social media metadata for your pages.
+
+## Definition
+
+```typescript
+interface IBuildPageMetadataConfig {
+  title: string;
+  description: string;
+  canonical_url?: string;
+  alternate_urls?: IAlternates;
+  og?: Partial<IOpenGraphConfig>;
+  twitter?: Partial<ITwitterConfig>;
+  keywords?: string[];
+  authors?: IAuthor[];
+  creator?: string;
+  published_time?: string;
+  modified_time?: string;
+  robots?: string;
+}
+```
+
+## Properties
+
+| Property         | Type                        | Required | Description                                          |
+| ---------------- | --------------------------- | -------- | ---------------------------------------------------- |
+| `title`          | `string`                    | Yes      | Page title                                           |
+| `description`    | `string`                    | Yes      | Meta description for search engines and social media |
+| `canonical_url`  | `string`                    | No       | Canonical URL to prevent duplicate content issues    |
+| `keywords`       | `string[]`                  | No       | SEO keywords                                         |
+| `authors`        | `IAuthor[]`                 | No       | Page authors                                         |
+| `creator`        | `string`                    | No       | Content creator name                                 |
+| `published_time` | `string`                    | No       | ISO 8601 publication timestamp                       |
+| `modified_time`  | `string`                    | No       | ISO 8601 modification timestamp                      |
+| `robots`         | `string`                    | No       | Robots meta directives (e.g., "noindex, nofollow")   |
+| `og`             | `Partial<IOpenGraphConfig>` | No       | Open Graph metadata for social sharing               |
+| `twitter`        | `Partial<ITwitterConfig>`   | No       | Twitter Card metadata                                |
+| `alternate_urls` | `IAlternates`               | No       | Alternate URLs for different language versions       |
+
+## Usage
+
+```typescript
+import { build_page_metadata } from '@libraries/utilities';
+
+export const metadata = build_page_metadata({
+  title: 'My Blog Post',
+  description: 'Learn about web development best practices',
+  canonical_url: 'https://example.com/blog/web-development',
+
+  keywords: ['web development', 'best practices', 'javascript'],
+
+  authors: [{ name: 'John Doe', url: 'https://example.com/authors/john' }],
+
+  creator: 'John Doe',
+  published_time: '2025-01-15T10:00:00Z',
+  modified_time: '2025-01-20T14:30:00Z',
+
+  og: {
+    type: 'article',
+    images: [{ url: 'https://example.com/og-image.jpg' }],
+  },
+
+  twitter: {
+    card: 'summary_large_image',
+    creator: '@johndoe',
+  },
+});
+```
+
+## Related Types
+
+- [`IBuildPageMetadataReturn`](/types/page-metadata-return) - Return type
+- [`IOpenGraphConfig`](/types/open-graph-config) - Open Graph metadata
+- [`ITwitterConfig`](/types/twitter-config) - Twitter Card metadata
+
+## Used In
+
+- [`build_page_metadata`](/utilities/build-page-metadata)

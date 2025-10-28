@@ -1,0 +1,69 @@
+# ITwitterConfig
+
+Twitter Card metadata configuration for optimized sharing on Twitter/X.
+
+## Definition
+
+```typescript
+type ITwitterCardType = 'summary' | 'summary_large_image' | 'app' | 'player';
+
+interface ITwitterConfig {
+  card: ITwitterCardType;
+  creator?: string;
+  site?: string;
+  title?: string;
+  description?: string;
+  images?: string[];
+}
+```
+
+## Properties
+
+| Property      | Type               | Description                                   |
+| ------------- | ------------------ | --------------------------------------------- |
+| `card`        | `ITwitterCardType` | Card type for display                         |
+| `creator`     | `string`           | Twitter handle of content creator (@username) |
+| `site`        | `string`           | Twitter handle of website (@website)          |
+| `title`       | `string`           | Tweet title (can differ from OG title)        |
+| `description` | `string`           | Tweet description                             |
+| `images`      | `string[]`         | Array of image URLs                           |
+
+## Card Types
+
+| Type                  | Best For         | Display               |
+| --------------------- | ---------------- | --------------------- |
+| `summary`             | General content  | Small text with thumb |
+| `summary_large_image` | Images, articles | Large image preview   |
+| `app`                 | Mobile apps      | App download card     |
+| `player`              | Video/audio      | Embedded player       |
+
+## Usage
+
+```typescript
+import { build_page_metadata } from '@libraries/utilities';
+
+export const metadata = build_page_metadata({
+  title: 'Check This Out!',
+  description: 'Amazing content',
+  canonical_url: 'https://example.com/article',
+
+  twitter: {
+    card: 'summary_large_image',
+    creator: '@yourhandle',
+    site: '@yoursite',
+    title: 'This is amazing!',
+    description: 'You should see this',
+    images: ['https://example.com/image.jpg'],
+  },
+});
+```
+
+## Related Types
+
+- [`IBuildPageMetadataConfig`](/types/page-metadata-config) - Config input
+- [`IBuildPageMetadataReturn`](/types/page-metadata-return) - Return type
+- [`IOpenGraphConfig`](/types/open-graph-config) - Open Graph metadata
+
+## Used In
+
+- [`build_page_metadata`](/utilities/build-page-metadata)

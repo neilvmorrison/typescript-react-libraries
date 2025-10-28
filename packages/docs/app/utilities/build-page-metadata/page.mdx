@@ -10,37 +10,59 @@ import { build_page_metadata } from '@libraries/utilities';
 export const metadata = build_page_metadata({
   title: 'My Page',
   description: 'Page description',
-  canonicalUrl: 'https://example.com/my-page',
+  canonical_url: 'https://example.com/my-page',
 });
 ```
 
 ## API Reference
 
+### Import
+
+```typescript
+import { build_page_metadata } from '@libraries/utilities';
+```
+
 ### Parameters
 
-- `title` - Page title
-- `description` - Meta description
-- `canonicalUrl` - Canonical URL
-- `ogImage` - Open Graph image URL
-- `ogType` - Open Graph type (default: 'website')
-- `twitterHandle` - Twitter handle for sharing
+| Name     | Type                       | Required | Description                       | Default |
+| -------- | -------------------------- | -------- | --------------------------------- | ------- |
+| `config` | `IBuildPageMetadataConfig` | Yes      | SEO metadata configuration object | N/A     |
+
+**Config Options:**
+
+| Name             | Type                        | Required | Description                            | Default   |
+| ---------------- | --------------------------- | -------- | -------------------------------------- | --------- |
+| `title`          | `string`                    | Yes      | Page title                             | N/A       |
+| `description`    | `string`                    | Yes      | Meta description                       | N/A       |
+| `canonical_url`  | `string`                    | No       | Canonical URL for the page             | undefined |
+| `keywords`       | `string[]`                  | No       | SEO keywords                           | undefined |
+| `authors`        | `IAuthor[]`                 | No       | Page authors                           | undefined |
+| `creator`        | `string`                    | No       | Content creator                        | undefined |
+| `published_time` | `string`                    | No       | Publication timestamp                  | undefined |
+| `modified_time`  | `string`                    | No       | Last modification timestamp            | undefined |
+| `robots`         | `string`                    | No       | Robots meta directives                 | undefined |
+| `og`             | `Partial<IOpenGraphConfig>` | No       | Open Graph metadata                    | undefined |
+| `twitter`        | `Partial<ITwitterConfig>`   | No       | Twitter Card metadata                  | undefined |
+| `alternate_urls` | `IAlternates`               | No       | Alternate URLs for different languages | undefined |
 
 ### Returns
 
-```typescript
-{
-  title: string;
-  description: string;
-  openGraph: {
-    title: string;
-    description: string;
-    url: string;
-    type: string;
-    images: Array<{ url: string }>;
-  }
-  twitter: {
-    handle: string;
-    card: string;
-  }
-}
-```
+| Name       | Type                       | Description                                             |
+| ---------- | -------------------------- | ------------------------------------------------------- |
+| (metadata) | `IBuildPageMetadataReturn` | Metadata object compatible with Next.js metadata export |
+
+**Return Structure:**
+
+| Property        | Type                                                         | Description                 |
+| --------------- | ------------------------------------------------------------ | --------------------------- |
+| `title`         | `string`                                                     | Page title                  |
+| `description`   | `string`                                                     | Meta description            |
+| `keywords`      | `string[]`                                                   | SEO keywords                |
+| `authors`       | `IMetadataAuthor[]`                                          | Page authors                |
+| `creator`       | `string`                                                     | Content creator             |
+| `publishedTime` | `string`                                                     | Publication timestamp       |
+| `modifiedTime`  | `string`                                                     | Last modification timestamp |
+| `robots`        | `string`                                                     | Robots directives           |
+| `openGraph`     | `IMetadataOpenGraph`                                         | Open Graph configuration    |
+| `twitter`       | `IMetadataTwitter`                                           | Twitter Card configuration  |
+| `alternates`    | `{ canonical?: string; languages?: Record<string, string> }` | Alternate URLs              |

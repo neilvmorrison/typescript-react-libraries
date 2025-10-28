@@ -36,14 +36,39 @@ export function LoginForm() {
 
 ## API Reference
 
+### Import
+
+```typescript
+import { useForm } from '@libraries/hooks';
+```
+
 ### Parameters
 
-- `initialValues` - Initial form values object
+| Name      | Type                 | Required | Description               | Default |
+| --------- | -------------------- | -------- | ------------------------- | ------- |
+| `options` | `IUseFormOptions<T>` | Yes      | Form configuration object | N/A     |
+
+**Options Details:**
+
+| Name                | Type                                              | Required | Description                                | Default   |
+| ------------------- | ------------------------------------------------- | -------- | ------------------------------------------ | --------- |
+| `initialValues`     | `T`                                               | Yes      | Initial form values object                 | N/A       |
+| `onSubmit`          | `(values: T) => void \| Promise<void>`            | Yes      | Callback executed on form submission       | N/A       |
+| `validate`          | `(values: T) => Partial<Record<keyof T, string>>` | No       | Validation function returning field errors | undefined |
+| `maxSubmitAttempts` | `number`                                          | No       | Maximum allowed submit attempts            | undefined |
 
 ### Returns
 
-- `values` - Current form values
-- `errors` - Form validation errors
-- `isSubmitting` - Whether form is currently submitting
-- `handleChange` - Change handler for form inputs
-- `handleSubmit` - Submit handler for the form
+| Name                | Type                                                                                               | Description                           |
+| ------------------- | -------------------------------------------------------------------------------------------------- | ------------------------------------- |
+| `values`            | `T`                                                                                                | Current form values                   |
+| `errors`            | `Partial<Record<keyof T, string>>`                                                                 | Form validation errors by field       |
+| `isSubmitting`      | `boolean`                                                                                          | Whether form is currently submitting  |
+| `dirtyFields`       | `Set<keyof T>`                                                                                     | Set of fields that have been modified |
+| `submitAttempts`    | `number`                                                                                           | Number of submission attempts         |
+| `handleChange`      | `(event: React.ChangeEvent<HTMLInputElement \| HTMLTextAreaElement \| HTMLSelectElement>) => void` | Change handler for form inputs        |
+| `handleSubmit`      | `(event: React.FormEvent<HTMLFormElement>) => Promise<void>`                                       | Form submission handler               |
+| `setFieldValue`     | `(field: keyof T, value: IFormFieldType) => void`                                                  | Programmatically set a field value    |
+| `reset`             | `() => void`                                                                                       | Reset form to initial values          |
+| `getFormFieldProps` | `(field: keyof T) => FormFieldProps`                                                               | Get props object for a form field     |
+| `getFieldValue`     | `(field: keyof T) => IFormFieldType`                                                               | Get value of a specific field         |

@@ -1,0 +1,75 @@
+# IUseFormOptions\<T\>
+
+Configuration object for the `useForm` hook. Specifies initial values, submission behavior, and validation logic.
+
+## Definition
+
+```typescript
+interface IUseFormOptions<T> {
+  initialValues: T;
+  maxSubmitAttempts?: number;
+  onSubmit: (values: T) => void | Promise<void>;
+  validate?: (values: T) => Partial<Record<keyof T, string>>;
+}
+```
+
+## Properties
+
+| Property            | Type                                              | Required | Description                                                         |
+| ------------------- | ------------------------------------------------- | -------- | ------------------------------------------------------------------- |
+| `initialValues`     | `T`                                               | Yes      | Initial form values object. Defines form shape and default values   |
+| `onSubmit`          | `(values: T) => void \| Promise<void>`            | Yes      | Callback executed when form is submitted. Can be async              |
+| `validate`          | `(values: T) => Partial<Record<keyof T, string>>` | No       | Optional validation function that returns field errors              |
+| `maxSubmitAttempts` | `number`                                          | No       | Maximum allowed submit attempts before blocking further submissions |
+
+## Type Parameters
+
+| Name | Description                                                     |
+| ---- | --------------------------------------------------------------- |
+| `T`  | The form values type (must be `Record<string, IFormFieldType>`) |
+
+## Usage
+
+```typescript
+import { useForm } from '@libraries/hooks';
+
+interface LoginForm {
+  email: string;
+  password: string;
+}
+
+const form = useForm<LoginForm>({
+  initialValues: {
+    email: '',
+    password: '',
+  },
+  validate: (values) => {
+    const errors: Partial<Record<keyof LoginForm, string>> = {};
+
+    if (!values.email) {
+      errors.email = 'Email is required';
+    }
+    if (!values.password) {
+      errors.password = 'Password is required';
+    }
+
+    return errors;
+  },
+  onSubmit: async (values) => {
+    await fetch('/api/login', {
+      method: 'POST',
+      body: JSON.stringify(values),
+    });
+  },
+  maxSubmitAttempts: 5,
+});
+```
+
+## Related Types
+
+- [`IUseFormReturn\<T\>`](/types/use-form-return) - Return value of `useForm`
+- [`IFormFieldType`](/types/form-field-type) - Supported field types
+
+## Used In
+
+- [`useForm`](/hooks/use-form)

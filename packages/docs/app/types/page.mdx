@@ -1,0 +1,52 @@
+# Type Definitions
+
+Comprehensive type definitions used across the libraries. These types are automatically generated from the source code to ensure consistency and accuracy.
+
+## Overview
+
+All types are carefully designed with full type safety in mind. Each type definition includes usage examples and cross-references to relevant hooks and utilities.
+
+## Core Types
+
+### Result Types
+
+- [`IResult\<T, E\>`](/types/result) - Generic result type for error handling
+- [`ISuccess\<T\>`](/types/result) - Success variant of result type
+- [`IError\<E\>`](/types/result) - Error variant of result type
+
+### Form Types
+
+- [`IUseFormOptions\<T\>`](/types/use-form-options) - Form hook configuration
+- [`IUseFormReturn\<T\>`](/types/use-form-return) - Form hook return value
+- [`IFormFieldType`](/types/form-field-type) - Supported form field types
+
+### API Types
+
+- [`IApiFetchOptions`](/types/api-fetch-options) - API fetch configuration
+- [`IApiError`](/types/api-error) - API error structure
+
+### Event Types
+
+- [`IEventMap`](/types/event-map) - Comprehensive event type mapping
+- [`IUseKeyboardShortcutOptions`](/types/keyboard-shortcut-options) - Keyboard shortcut config
+
+### Storage Types
+
+- [`IUseLocalStorageReturn<T>`](/types/local-storage-return) - LocalStorage hook return value
+
+### Metadata Types
+
+- [`IBuildPageMetadataConfig`](/types/page-metadata-config) - SEO metadata configuration
+- [`IBuildPageMetadataReturn`](/types/page-metadata-return) - SEO metadata return value
+- [`IOpenGraphConfig`](/types/open-graph-config) - Open Graph metadata
+- [`ITwitterConfig`](/types/twitter-config) - Twitter Card metadata
+
+## Auto-Generation
+
+These type definitions are automatically generated from the source code. To update them, make changes to the type definitions in the library source files and run:
+
+```bash
+npm run docs:generate-types
+```
+
+This ensures the documentation stays in sync with the actual implementation.

@@ -1,38 +1,8 @@
-import { forwardRef, HTMLAttributes } from 'react';
+import { forwardRef, HTMLAttributes, ElementType, createElement } from 'react';
 
-type TypographyElement =
-  | HTMLParagraphElement
-  | HTMLHeadingElement
-  | HTMLDivElement
-  | HTMLSpanElement
-  | HTMLQuoteElement
-  | HTMLLabelElement;
-
-interface ITypographyProps extends HTMLAttributes<TypographyElement> {
-  as?:
-    | 'p'
-    | 'span'
-    | 'div'
-    | 'h1'
-    | 'h2'
-    | 'h3'
-    | 'h4'
-    | 'h5'
-    | 'h6'
-    | 'label'
-    | 'blockquote';
-  variant?:
-    | 'h1'
-    | 'h2'
-    | 'h3'
-    | 'h4'
-    | 'h5'
-    | 'h6'
-    | 'p'
-    | 'span'
-    | 'div'
-    | 'label'
-    | 'quote';
+interface ITypographyProps extends Omit<HTMLAttributes<HTMLElement>, 'as'> {
+  as?: ElementTag;
+  variant?: ElementTag;
   size?:
     | 'xs'
     | 'sm'
@@ -70,13 +40,26 @@ interface ITypographyProps extends HTMLAttributes<TypographyElement> {
   className?: string;
 }
 
-export const Typography = forwardRef<TypographyElement, ITypographyProps>(
+type ElementTag =
+  | 'h1'
+  | 'h2'
+  | 'h3'
+  | 'h4'
+  | 'h5'
+  | 'h6'
+  | 'p'
+  | 'span'
+  | 'div'
+  | 'label'
+  | 'blockquote';
+
+export const Typography = forwardRef<HTMLElement, ITypographyProps>(
   ({ children, ...props }, ref) => {
-    const Element = (props.as || 'p') as React.ElementType;
-    return (
-      <Element ref={ref} {...props}>
-        {children}
-      </Element>
+    const Element = props.as ?? 'p';
+    return createElement(
+      Element as ElementType,
+      { ref: ref as unknown, ...props },
+      children
     );
   }
 );

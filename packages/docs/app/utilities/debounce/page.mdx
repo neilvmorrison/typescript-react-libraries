@@ -16,14 +16,24 @@ const handleSearch = debounce((query: string) => {
 
 ## API Reference
 
+### Import
+
+```typescript
+import { debounce } from '@libraries/utilities';
+```
+
 ### Parameters
 
-- `fn` - Function to debounce
-- `delay` - Delay in milliseconds
+| Name    | Type                             | Required | Description           | Default |
+| ------- | -------------------------------- | -------- | --------------------- | ------- |
+| `fn`    | `T extends (...args) => unknown` | Yes      | Function to debounce  | N/A     |
+| `delay` | `number`                         | Yes      | Delay in milliseconds | N/A     |
 
 ### Returns
 
-A debounced function that delays execution.
+| Name        | Type                               | Description                                                                                                |
+| ----------- | ---------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| (debounced) | `(...args: Parameters<T>) => void` | A debounced function that delays execution until after the specified delay has elapsed since the last call |
 
 ## Features
 

@@ -18,15 +18,27 @@ export function ResizeListener() {
 
 ## API Reference
 
+### Import
+
+```typescript
+import { useEventListener } from '@libraries/hooks';
+```
+
 ### Parameters
 
-- `event` - Event name to listen for
-- `callback` - Function to execute when event fires
-- `options` - Optional configuration object (passive, capture, etc.)
-- `target` - Optional target element (defaults to window)
+| Name       | Type                            | Required | Description                          | Default |
+| ---------- | ------------------------------- | -------- | ------------------------------------ | ------- |
+| `event`    | `K extends keyof IEventMap`     | Yes      | Event name to listen for             | N/A     |
+| `callback` | `(event: IEventMap[K]) => void` | Yes      | Function to execute when event fires | N/A     |
+
+### Returns
+
+| Name   | Type   | Description                                         |
+| ------ | ------ | --------------------------------------------------- |
+| (void) | `void` | No return value; automatically cleans up on unmount |
 
 ### Features
 
 - Automatic cleanup on component unmount
 - Supports both window and element events
-- Configurable event listener options
+- Type-safe event handling with full event map coverage

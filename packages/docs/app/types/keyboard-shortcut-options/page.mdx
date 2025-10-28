@@ -1,0 +1,119 @@
+# IUseKeyboardShortcutOptions
+
+Configuration options for the `useKeyboardShortcut` hook. Defines which keyboard combination triggers an action.
+
+## Definition
+
+```typescript
+export type KeyModifier = 'ctrl' | 'shift' | 'alt' | 'meta';
+
+interface IUseKeyboardShortcutOptions {
+  key: string;
+  modifiers?: KeyModifier[];
+  onPress: () => void;
+  preventDefault?: boolean;
+}
+```
+
+## Properties
+
+| Property         | Type            | Required | Description                                                               |
+| ---------------- | --------------- | -------- | ------------------------------------------------------------------------- |
+| `key`            | `string`        | Yes      | The main key to listen for (e.g., 's', 'Enter', '1')                      |
+| `modifiers`      | `KeyModifier[]` | No       | Array of modifier keys to require: `'ctrl'`, `'shift'`, `'alt'`, `'meta'` |
+| `onPress`        | `() => void`    | Yes      | Callback executed when shortcut is triggered                              |
+| `preventDefault` | `boolean`       | No       | Whether to prevent default browser behavior (default: `true`)             |
+
+## Modifiers
+
+| Modifier  | Meaning                     | Platform                              |
+| --------- | --------------------------- | ------------------------------------- |
+| `'ctrl'`  | Control/Command key         | Windows/Linux uses Ctrl, Mac uses Cmd |
+| `'shift'` | Shift key                   | All platforms                         |
+| `'alt'`   | Alt key                     | All platforms                         |
+| `'meta'`  | Command (Mac) / Windows key | Mac: Command, Windows: Windows key    |
+
+## Usage
+
+```typescript
+import { useKeyboardShortcut } from '@libraries/hooks';
+
+export function Editor() {
+  // Simple shortcut: Ctrl+S
+  useKeyboardShortcut({
+    key: 's',
+    modifiers: ['ctrl'],
+    onPress: () => {
+      console.log('Save triggered');
+      // Save document
+    },
+  });
+
+  // Multiple modifiers: Ctrl+Shift+P
+  useKeyboardShortcut({
+    key: 'p',
+    modifiers: ['ctrl', 'shift'],
+    onPress: () => {
+      console.log('Command palette');
+      // Open command palette
+    },
+  });
+
+  // Single key: Enter
+  useKeyboardShortcut({
+    key: 'Enter',
+    onPress: () => {
+      console.log('Submit');
+    },
+    preventDefault: true,
+  });
+
+  return <textarea placeholder="Type here..." />;
+}
+```
+
+## Common Shortcuts
+
+```typescript
+// Save: Ctrl+S
+useKeyboardShortcut({
+  key: 's',
+  modifiers: ['ctrl'],
+  onPress: save,
+});
+
+// Undo: Ctrl+Z
+useKeyboardShortcut({
+  key: 'z',
+  modifiers: ['ctrl'],
+  onPress: undo,
+});
+
+// Redo: Ctrl+Shift+Z
+useKeyboardShortcut({
+  key: 'z',
+  modifiers: ['ctrl', 'shift'],
+  onPress: redo,
+});
+
+// Find: Ctrl+F
+useKeyboardShortcut({
+  key: 'f',
+  modifiers: ['ctrl'],
+  onPress: openFind,
+});
+
+// Escape to close
+useKeyboardShortcut({
+  key: 'Escape',
+  onPress: closeModal,
+});
+```
+
+## Related Types
+
+None
+
+## Used In
+
+- [`useKeyboardShortcut`](/hooks/use-keyboard-shortcut)

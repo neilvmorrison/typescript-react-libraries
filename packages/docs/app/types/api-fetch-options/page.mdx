@@ -1,0 +1,94 @@
+# IApiFetchOptions
+
+Configuration options for API fetch functions. Extends the standard Fetch API `RequestInit` with additional convenience properties.
+
+## Definition
+
+```typescript
+interface IApiFetchOptions extends Omit<RequestInit, 'body'> {
+  body?: unknown;
+  parseResponse?: boolean;
+}
+```
+
+## Properties
+
+| Property                     | Type          | Required | Description                                         |
+| ---------------------------- | ------------- | -------- | --------------------------------------------------- |
+| `body`                       | `unknown`     | No       | Request body. Automatically JSON serialized         |
+| `parseResponse`              | `boolean`     | No       | Whether to parse response as JSON (default: `true`) |
+| `method`                     | `string`      | No       | HTTP method (inherited from RequestInit)            |
+| `headers`                    | `HeadersInit` | No       | Custom headers                                      |
+| `signal`                     | `AbortSignal` | No       | For request cancellation                            |
+| Other RequestInit properties |               | No       | Standard Fetch API options                          |
+
+## Usage
+
+### Basic Request
+
+```typescript
+import { api_fetch } from '@libraries/utilities';
+
+const result = await api_fetch('/api/users');
+
+if (result.error) {
+  console.error('Error:', result.error);
+} else {
+  console.log('Users:', result.data);
+}
+```
+
+### With Custom Headers
+
+```typescript
+const result = await api_fetch('/api/data', {
+  headers: {
+    Authorization: `Bearer ${token}`,
+    'X-Custom-Header': 'value',
+  },
+});
+```
+
+### With Request Body
+
+```typescript
+const result = await api_fetch('/api/users', {
+  method: 'POST',
+  body: { name: 'John', email: 'john@example.com' },
+});
+```
+
+### With Abort Signal
+
+```typescript
+const controller = new AbortController();
+
+// Cancel after 5 seconds
+setTimeout(() => controller.abort(), 5000);
+
+const result = await api_fetch('/api/data', {
+  signal: controller.signal,
+});
+```
+
+### Skip JSON Parsing
+
+```typescript
+const result = await api_fetch('/api/file', {
+  parseResponse: false,
+});
+```
+
+## Related Types
+
+- [`IApiError`](/types/api-error) - Error structure
+- [`IResult\<T, E\>`](/types/result) - Result type
+
+## Used In
+
+- [`api_fetch`](/utilities/api-fetch)
+- [`api_get`](/utilities/api-fetch)
+- [`api_post`](/utilities/api-fetch)
+- [`api_put`](/utilities/api-fetch)
+- [`api_patch`](/utilities/api-fetch)
+- [`api_delete`](/utilities/api-fetch)

@@ -23,11 +23,27 @@ export function Accordion() {
 
 ## API Reference
 
+### Import
+
+```typescript
+import { useToggle } from '@libraries/hooks';
+```
+
 ### Parameters
 
-- `initialValue` - Initial boolean value (default: false)
+| Name           | Type                  | Required | Description                                                         | Default |
+| -------------- | --------------------- | -------- | ------------------------------------------------------------------- | ------- |
+| `initialValue` | `boolean \| string[]` | No       | Initial value - either boolean or array of strings to cycle through | `false` |
 
 ### Returns
 
-- `value` - Current boolean state
-- `toggle` - Function to toggle the boolean value
+| Name  | Type                | Description                                                 |
+| ----- | ------------------- | ----------------------------------------------------------- |
+| `[0]` | `boolean \| string` | Current toggle value (boolean or current string from array) |
+| `[1]` | `() => void`        | Function to toggle the value                                |
+
+### Features
+
+- Support for boolean toggling
+- Support for cycling through string values
+- Simple tuple return for destructuring

@@ -15,17 +15,27 @@ get_user_initials(''); // ""
 
 ## API Reference
 
+### Import
+
+```typescript
+import { get_user_initials } from '@libraries/utilities';
+```
+
 ### Parameters
 
-- `name` - Full name or partial name string
+| Name        | Type     | Required | Description                      | Default |
+| ----------- | -------- | -------- | -------------------------------- | ------- |
+| `full_name` | `string` | Yes      | Full name or partial name string | N/A     |
 
 ### Returns
 
-A string of 1-2 uppercase initials.
+| Name       | Type     | Description                                              |
+| ---------- | -------- | -------------------------------------------------------- |
+| (initials) | `string` | A string of 1-2 uppercase initials derived from the name |
 
 ## Behavior
 
-- Takes first letter of first name and first name of last name
+- Takes first letter of first name and first letter of last name
 - Returns uppercase initials
 - Handles edge cases gracefully
 - Perfect for avatar generation

@@ -1,0 +1,47 @@
+# IBuildPageMetadataReturn
+
+Return value of the `build_page_metadata` utility. Compatible with Next.js metadata export format.
+
+## Definition
+
+```typescript
+interface IBuildPageMetadataReturn {
+  title?: string;
+  description?: string;
+  keywords?: string[];
+  authors?: IMetadataAuthor[];
+  creator?: string;
+  publishedTime?: string;
+  modifiedTime?: string;
+  robots?: string;
+  metadataBase?: URL;
+  alternates?: {
+    canonical?: string;
+    languages?: Record<string, string>;
+  };
+  openGraph?: IMetadataOpenGraph;
+  twitter?: IMetadataTwitter;
+}
+```
+
+## Usage in Next.js
+
+```typescript
+import { build_page_metadata } from '@libraries/utilities';
+
+export const metadata = build_page_metadata({
+  title: 'My Page',
+  description: 'Page description',
+  canonical_url: 'https://example.com',
+});
+```
+
+## Related Types
+
+- [`IBuildPageMetadataConfig`](/types/page-metadata-config) - Configuration input
+- [`IMetadataOpenGraph`](/types/open-graph-config) - Open Graph metadata
+- [`IMetadataTwitter`](/types/twitter-config) - Twitter metadata
+
+## Used In
+
+- [`build_page_metadata`](/utilities/build-page-metadata)

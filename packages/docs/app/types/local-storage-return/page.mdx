@@ -1,0 +1,117 @@
+# IUseLocalStorageReturn\<T\>
+
+Return value of the `useLocalStorage` hook. Contains the current stored value and functions to update or remove it.
+
+## Definition
+
+```typescript
+interface IUseLocalStorageReturn<T> {
+  value: T;
+  setValue: (value: T | ((current: T) => T)) => void;
+  removeValue: () => void;
+}
+```
+
+## Properties
+
+| Property      | Type                                        | Description                     |
+| ------------- | ------------------------------------------- | ------------------------------- |
+| `value`       | `T`                                         | Current value from localStorage |
+| `setValue`    | `(value: T \| ((current: T) => T)) => void` | Update the stored value         |
+| `removeValue` | `() => void`                                | Remove value from storage       |
+
+## Type Parameters
+
+| Name | Description              |
+| ---- | ------------------------ |
+| `T`  | The type of stored value |
+
+## Usage
+
+```typescript
+import { useLocalStorage } from '@libraries/hooks';
+
+export function ThemeToggle() {
+  const { value: theme, setValue: setTheme } = useLocalStorage<'light' | 'dark'>(
+    'theme',
+    'light'
+  );
+
+  const toggleTheme = () => {
+    setTheme(theme === 'light' ? 'dark' : 'light');
+  };
+
+  return (
+    <button onClick={toggleTheme}>
+      Current theme: {theme}
+    </button>
+  );
+}
+
+export function Counter() {
+  const { value, setValue, removeValue } = useLocalStorage<number>(
+    'counter',
+    0
+  );
+
+  return (
+    <div>
+      <p>Count: {value}</p>
+
+      {/* Direct value update */}
+      <button onClick={() => setValue(value + 1)}>Increment</button>
+
+      {/* Functional update */}
+      <button onClick={() => setValue(prev => prev - 1)}>Decrement</button>
+
+      {/* Remove from storage */}
+      <button onClick={removeValue}>Reset</button>
+    </div>
+  );
+}
+
+export function UserPreferences() {
+  interface Prefs {
+    fontSize: number;
+    sidebarCollapsed: boolean;
+  }
+
+  const { value: prefs, setValue: setPrefs } = useLocalStorage<Prefs>(
+    'userPrefs',
+    { fontSize: 14, sidebarCollapsed: false }
+  );
+
+  const updateFontSize = (size: number) => {
+    setPrefs(prev => ({ ...prev, fontSize: size }));
+  };
+
+  return (
+    <div>
+      <p>Font size: {prefs.fontSize}</p>
+      <button onClick={() => updateFontSize(prefs.fontSize + 1)}>
+        Increase
+      </button>
+    </div>
+  );
+}
+```
+
+## Cross-Tab Synchronization
+
+Changes in one tab are automatically synchronized to others:
+
+```typescript
+// Tab 1: Change theme
+setTheme('dark');
+
+// Tab 2: Automatically receives update
+// value changes to 'dark' via storage event listener
+```
+
+## Related Types
+
+None
+
+## Used In
+
+- [`useLocalStorage`](/hooks/use-local-storage)
