@@ -1,36 +1,95 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# @libraries Documentation
+
+Comprehensive documentation site for the @libraries monorepo, built with [Nextra](https://nextra.site) and [Next.js](https://nextjs.org).
+
+## About
+
+This site documents three main packages:
+
+- **@libraries/hooks** - React hooks for common use cases
+- **@libraries/utilities** - TypeScript utilities
+- **@libraries/components** - Accessible React components
 
 ## Getting Started
 
-First, run the development server:
+### Development
+
+Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the documentation.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Build for production:
+
+```bash
+npm run build
+npm start
+```
+
+## Project Structure
+
+```
+app/
+├── page.tsx              # Landing page
+├── layout.tsx            # Root layout with Nextra theme
+├── _meta.ts              # Navigation structure
+├── introduction.mdx      # Introduction page
+├── hooks/                # Hooks documentation
+│   ├── _meta.ts
+│   ├── page.mdx
+│   └── [hook-name].mdx
+├── utilities/            # Utilities documentation
+│   ├── _meta.ts
+│   ├── page.mdx
+│   └── [utility-name].mdx
+└── components/           # Components documentation
+    ├── _meta.ts
+    ├── page.mdx
+    └── [component-name].mdx
+```
+
+## Key Features
+
+- **MDX Support** - Write documentation with interactive React components
+- **Full-text Search** - Built-in search with Flexsearch
+- **Dark Mode** - Automatic light/dark theme support
+- **Responsive Design** - Mobile-friendly documentation
+- **Code Highlighting** - Syntax highlighting with copy button
+- **Navigation** - Automatic sidebar and breadcrumb navigation
+
+## Customization
+
+### Theme Configuration
+
+Edit `app/layout.tsx` to customize:
+
+- Logo and branding
+- Navigation links
+- Footer content
+- GitHub repository link
+
+### MDX Components
+
+Custom components can be added in `mdx-components.ts`.
+
+## Deployment
+
+Deploy to Vercel for free:
+
+```bash
+npm install -g vercel
+vercel
+```
+
+Or deploy to your preferred hosting platform (Netlify, GitHub Pages, etc.).
 
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- [Nextra Documentation](https://nextra.site/docs)
+- [Next.js Documentation](https://nextjs.org/docs)
+- [MDX Documentation](https://mdxjs.com)

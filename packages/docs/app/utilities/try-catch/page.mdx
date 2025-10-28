@@ -1,0 +1,47 @@
+# try_catch
+
+Wrapped try-catch that returns a Result type instead of throwing.
+
+## Usage
+
+```typescript
+import { try_catch } from '@libraries/utilities';
+
+const result = await try_catch(async () => {
+  const response = await fetch('/api/users');
+  return response.json();
+});
+
+if (result.error) {
+  console.error('Error:', result.error);
+} else {
+  console.log('Data:', result.data);
+}
+```
+
+## API Reference
+
+### Parameters
+
+- `fn` - Function to execute (sync or async)
+
+### Returns
+
+```typescript
+interface IResult<T> {
+  data?: T;
+  error?: IError;
+}
+
+interface IError {
+  message: string;
+  cause?: unknown;
+}
+```
+
+## Benefits
+
+- No need to wrap code in try-catch blocks
+- Type-safe error handling
+- Works with both sync and async functions
+- Cleaner error handling flow

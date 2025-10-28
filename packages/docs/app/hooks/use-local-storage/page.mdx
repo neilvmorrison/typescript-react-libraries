@@ -1,0 +1,32 @@
+# useLocalStorage
+
+Sync component state with browser localStorage.
+
+## Usage
+
+```typescript
+import { useLocalStorage } from '@libraries/hooks';
+
+export function Counter() {
+  const [count, setCount] = useLocalStorage('count', 0);
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+    </div>
+  );
+}
+```
+
+## API Reference
+
+### Parameters
+
+- `key` - localStorage key to use
+- `initialValue` - Initial value if key doesn't exist in storage
+
+### Returns
+
+- `value` - Current stored value
+- `setValue` - Function to update the stored value

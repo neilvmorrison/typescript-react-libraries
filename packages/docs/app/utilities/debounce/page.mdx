@@ -1,0 +1,39 @@
+# debounce
+
+Delay function execution until after activity stops for specified duration.
+
+## Usage
+
+```typescript
+import { debounce } from '@libraries/utilities';
+
+const handleSearch = debounce((query: string) => {
+  console.log('Searching for:', query);
+}, 300);
+
+<input onChange={(e) => handleSearch(e.target.value)} />
+```
+
+## API Reference
+
+### Parameters
+
+- `fn` - Function to debounce
+- `delay` - Delay in milliseconds
+
+### Returns
+
+A debounced function that delays execution.
+
+## Features
+
+- Automatic cleanup
+- Prevents excessive function calls
+- Useful for search inputs, window resize, etc.
+
+## Common Use Cases
+
+- Search input handling
+- Auto-save functionality
+- Window resize handlers
+- Form field validation

@@ -1,0 +1,57 @@
+# api_fetch
+
+Type-safe API requests with comprehensive error handling.
+
+## Usage
+
+```typescript
+import { api_fetch, api_get, api_post, api_delete } from '@libraries/utilities';
+
+// Basic fetch
+const { data, error } = await api_fetch('/api/users');
+
+// GET request
+const { data: users } = await api_get('/api/users');
+
+// POST request
+const { data: newUser } = await api_post('/api/users', {
+  name: 'John Doe',
+  email: 'john@example.com',
+});
+
+// DELETE request
+await api_delete(`/api/users/${userId}`);
+```
+
+## API Reference
+
+### Functions
+
+- `api_fetch(url, options)` - Generic fetch wrapper
+- `api_get(url, options)` - GET request
+- `api_post(url, body, options)` - POST request
+- `api_put(url, body, options)` - PUT request
+- `api_patch(url, body, options)` - PATCH request
+- `api_delete(url, options)` - DELETE request
+
+### Options
+
+- `headers` - Custom headers
+- `signal` - AbortSignal for cancellation
+- `timeout` - Request timeout in milliseconds
+
+### Error Handling
+
+All functions return a result object:
+
+```typescript
+interface IResult<T> {
+  data?: T;
+  error?: IApiError;
+}
+
+class ApiError extends Error {
+  status: number;
+  data: unknown;
+}
+```

@@ -1,0 +1,49 @@
+# useForm
+
+Manage form state and handle form submissions with ease.
+
+## Usage
+
+```typescript
+import { useForm } from '@libraries/hooks';
+
+export function LoginForm() {
+  const { values, errors, isSubmitting, handleChange, handleSubmit } = useForm({
+    email: '',
+    password: '',
+  });
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input
+        name="email"
+        value={values.email}
+        onChange={handleChange}
+      />
+      <input
+        name="password"
+        type="password"
+        value={values.password}
+        onChange={handleChange}
+      />
+      <button type="submit" disabled={isSubmitting}>
+        {isSubmitting ? 'Loading...' : 'Submit'}
+      </button>
+    </form>
+  );
+}
+```
+
+## API Reference
+
+### Parameters
+
+- `initialValues` - Initial form values object
+
+### Returns
+
+- `values` - Current form values
+- `errors` - Form validation errors
+- `isSubmitting` - Whether form is currently submitting
+- `handleChange` - Change handler for form inputs
+- `handleSubmit` - Submit handler for the form

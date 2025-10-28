@@ -1,0 +1,32 @@
+# useEventListener
+
+Safely attach and remove event listeners with automatic cleanup.
+
+## Usage
+
+```typescript
+import { useEventListener } from '@libraries/hooks';
+
+export function ResizeListener() {
+  useEventListener('resize', () => {
+    console.log('Window resized');
+  });
+
+  return <div>Check the console on window resize</div>;
+}
+```
+
+## API Reference
+
+### Parameters
+
+- `event` - Event name to listen for
+- `callback` - Function to execute when event fires
+- `options` - Optional configuration object (passive, capture, etc.)
+- `target` - Optional target element (defaults to window)
+
+### Features
+
+- Automatic cleanup on component unmount
+- Supports both window and element events
+- Configurable event listener options

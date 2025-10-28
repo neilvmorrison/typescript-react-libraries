@@ -1,0 +1,38 @@
+# get_user_initials
+
+Generate initials from user names for avatars and displays.
+
+## Usage
+
+```typescript
+import { get_user_initials } from '@libraries/utilities';
+
+get_user_initials('John Doe'); // "JD"
+get_user_initials('Alice Smith Johnson'); // "AS"
+get_user_initials('Bob'); // "B"
+get_user_initials(''); // ""
+```
+
+## API Reference
+
+### Parameters
+
+- `name` - Full name or partial name string
+
+### Returns
+
+A string of 1-2 uppercase initials.
+
+## Behavior
+
+- Takes first letter of first name and first name of last name
+- Returns uppercase initials
+- Handles edge cases gracefully
+- Perfect for avatar generation
+
+## Common Use Cases
+
+- Avatar initials
+- User list displays
+- Comment author initials
+- Team member badges

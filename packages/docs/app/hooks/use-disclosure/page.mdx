@@ -1,0 +1,34 @@
+# useDisclosure
+
+Control open/close state for modals, drawers, and similar components.
+
+## Usage
+
+```typescript
+import { useDisclosure } from '@libraries/hooks';
+
+export function ModalExample() {
+  const { isOpen, open, close, toggle } = useDisclosure();
+
+  return (
+    <>
+      <button onClick={open}>Open Modal</button>
+      {isOpen && (
+        <div className="modal">
+          <h2>Modal Title</h2>
+          <button onClick={close}>Close</button>
+        </div>
+      )}
+    </>
+  );
+}
+```
+
+## API Reference
+
+### Returns
+
+- `isOpen` - Boolean indicating if disclosure is open
+- `open` - Function to open the disclosure
+- `close` - Function to close the disclosure
+- `toggle` - Function to toggle the disclosure

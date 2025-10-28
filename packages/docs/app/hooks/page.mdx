@@ -1,0 +1,41 @@
+# React Hooks
+
+A collection of production-ready React hooks for common use cases.
+
+## Available Hooks
+
+| Hook                                                  | Purpose                                         |
+| ----------------------------------------------------- | ----------------------------------------------- |
+| [`useForm`](/hooks/use-form)                          | Manage form state and validation                |
+| [`useDisclosure`](/hooks/use-disclosure)              | Control open/close state for modals and drawers |
+| [`useKeyboardShortcut`](/hooks/use-keyboard-shortcut) | Handle keyboard shortcuts and key combinations  |
+| [`useLocalStorage`](/hooks/use-local-storage)         | Sync state with browser localStorage            |
+| [`useToggle`](/hooks/use-toggle)                      | Simple boolean state toggle                     |
+| [`useEventListener`](/hooks/use-event-listener)       | Attach/remove event listeners safely            |
+| [`usePrevious`](/hooks/use-previous)                  | Track previous component prop or state          |
+
+## Installation
+
+```bash
+npm install @libraries/hooks
+```
+
+## Quick Start
+
+```typescript
+import { useForm, useToggle, useLocalStorage } from '@libraries/hooks';
+
+export function MyComponent() {
+  const [isOpen, toggle] = useToggle();
+  const { values, handleChange } = useForm({ name: '' });
+  const [data, setData] = useLocalStorage('myKey', {});
+
+  return (
+    <div>
+      {/* Your component */}
+    </div>
+  );
+}
+```
+
+Each hook is individually exported, so you can import only what you need to minimize bundle size.

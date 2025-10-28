@@ -1,0 +1,38 @@
+# throttle
+
+Limit function execution to at most once per specified time interval.
+
+## Usage
+
+```typescript
+import { throttle } from '@libraries/utilities';
+
+const handleScroll = throttle(() => {
+  console.log('Scroll event');
+}, 300);
+
+window.addEventListener('scroll', handleScroll);
+```
+
+## API Reference
+
+### Parameters
+
+- `fn` - Function to throttle
+- `limit` - Time interval in milliseconds
+
+### Returns
+
+A throttled function that executes at most once per interval.
+
+## Differences from Debounce
+
+- **Throttle**: Executes at regular intervals while activity continues
+- **Debounce**: Executes only after activity stops
+
+## Common Use Cases
+
+- Scroll event handlers
+- Mouse move tracking
+- Button click rate limiting
+- Animation frame callbacks

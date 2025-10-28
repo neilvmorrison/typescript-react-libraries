@@ -1,0 +1,52 @@
+# Utilities
+
+A collection of essential TypeScript utilities for common tasks.
+
+## Available Utilities
+
+| Utility                                                 | Purpose                                             |
+| ------------------------------------------------------- | --------------------------------------------------- |
+| [`api_fetch`](/utilities/api-fetch)                     | Type-safe API requests with error handling          |
+| [`build_page_metadata`](/utilities/build-page-metadata) | Generate SEO metadata for pages                     |
+| [`clamp`](/utilities/clamp)                             | Constrain a number between min and max              |
+| [`debounce`](/utilities/debounce)                       | Delay function execution until after activity stops |
+| [`throttle`](/utilities/throttle)                       | Limit function execution frequency                  |
+| [`try_catch`](/utilities/try-catch)                     | Wrapped try-catch with Result type                  |
+| [`format_date`](/utilities/format-date)                 | Format dates consistently                           |
+| [`get_user_initials`](/utilities/get-user-initials)     | Generate initials from user names                   |
+
+## Installation
+
+```bash
+npm install @libraries/utilities
+```
+
+## Quick Start
+
+```typescript
+import {
+  api_fetch,
+  clamp,
+  debounce,
+  format_date,
+  get_user_initials,
+  try_catch,
+} from '@libraries/utilities';
+
+// Make a typed API request
+const { data, error } = await api_fetch('/api/users');
+
+// Constrain a number
+const value = clamp(50, 0, 100);
+
+// Format a date
+const formatted = format_date(new Date());
+
+// Get user initials
+const initials = get_user_initials('John Doe');
+
+// Safely call a function
+const result = await try_catch(() => someAsyncFunction());
+```
+
+All utilities are individually exported for optimal tree-shaking.

@@ -1,0 +1,33 @@
+# clamp
+
+Constrain a number between a minimum and maximum value.
+
+## Usage
+
+```typescript
+import { clamp } from '@libraries/utilities';
+
+clamp(5, 0, 10); // Returns 5
+clamp(-5, 0, 10); // Returns 0
+clamp(15, 0, 10); // Returns 10
+clamp(100, 50, 100); // Returns 100
+```
+
+## API Reference
+
+### Parameters
+
+- `value` - The number to constrain
+- `min` - Minimum allowed value
+- `max` - Maximum allowed value
+
+### Returns
+
+The constrained number within the specified range.
+
+## Common Use Cases
+
+- Clamping animation progress values (0 to 1)
+- Constraining scroll positions
+- Limiting volume levels
+- Keeping numeric inputs within valid ranges

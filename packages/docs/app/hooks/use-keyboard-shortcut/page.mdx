@@ -1,0 +1,33 @@
+# useKeyboardShortcut
+
+Handle keyboard shortcuts and key combinations in your components.
+
+## Usage
+
+```typescript
+import { useKeyboardShortcut } from '@libraries/hooks';
+
+export function Editor() {
+  useKeyboardShortcut(['ctrl', 's'], () => {
+    console.log('Save triggered');
+    // Handle save
+  });
+
+  return <div>Press Ctrl+S to save</div>;
+}
+```
+
+## API Reference
+
+### Parameters
+
+- `keys` - Array of key modifiers and key ('ctrl', 'shift', 'alt', or specific key)
+- `callback` - Function to execute when the shortcut is triggered
+- `options` - Optional configuration object
+
+### Supported Modifiers
+
+- `'ctrl'` - Control key
+- `'shift'` - Shift key
+- `'alt'` - Alt key
+- `'meta'` - Command key (Mac) / Windows key

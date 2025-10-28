@@ -1,0 +1,46 @@
+# build_page_metadata
+
+Generate comprehensive SEO metadata for your pages.
+
+## Usage
+
+```typescript
+import { build_page_metadata } from '@libraries/utilities';
+
+export const metadata = build_page_metadata({
+  title: 'My Page',
+  description: 'Page description',
+  canonicalUrl: 'https://example.com/my-page',
+});
+```
+
+## API Reference
+
+### Parameters
+
+- `title` - Page title
+- `description` - Meta description
+- `canonicalUrl` - Canonical URL
+- `ogImage` - Open Graph image URL
+- `ogType` - Open Graph type (default: 'website')
+- `twitterHandle` - Twitter handle for sharing
+
+### Returns
+
+```typescript
+{
+  title: string;
+  description: string;
+  openGraph: {
+    title: string;
+    description: string;
+    url: string;
+    type: string;
+    images: Array<{ url: string }>;
+  }
+  twitter: {
+    handle: string;
+    card: string;
+  }
+}
+```

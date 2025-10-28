@@ -1,17 +1,23 @@
 import nextra from 'nextra';
 
-// export default nextConfig;
-
-// Set up Nextra with its configuration
 const withNextra = nextra({
-  // ... Add Nextra-specific options here
+  latex: true,
+  defaultShowCopyCode: true,
 });
 
-// Export the final Next.js config with Nextra included
 export default withNextra({
   turbopack: {
     resolveAlias: {
       'next-mdx-import-source-file': './mdx-components.ts',
     },
+  },
+  redirects() {
+    return [
+      {
+        source: '/docs',
+        destination: '/',
+        permanent: true,
+      },
+    ];
   },
 });

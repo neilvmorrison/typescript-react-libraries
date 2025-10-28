@@ -1,0 +1,33 @@
+# useToggle
+
+Simple boolean state toggle with optional initial value.
+
+## Usage
+
+```typescript
+import { useToggle } from '@libraries/hooks';
+
+export function Accordion() {
+  const [isExpanded, toggle] = useToggle(false);
+
+  return (
+    <div>
+      <button onClick={toggle}>
+        {isExpanded ? 'Collapse' : 'Expand'}
+      </button>
+      {isExpanded && <p>Hidden content</p>}
+    </div>
+  );
+}
+```
+
+## API Reference
+
+### Parameters
+
+- `initialValue` - Initial boolean value (default: false)
+
+### Returns
+
+- `value` - Current boolean state
+- `toggle` - Function to toggle the boolean value

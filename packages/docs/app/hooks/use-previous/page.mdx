@@ -1,0 +1,30 @@
+# usePrevious
+
+Track the previous value of a prop or state.
+
+## Usage
+
+```typescript
+import { usePrevious } from '@libraries/hooks';
+
+export function ValueDisplay({ value }: { value: number }) {
+  const previousValue = usePrevious(value);
+
+  return (
+    <div>
+      <p>Current: {value}</p>
+      <p>Previous: {previousValue}</p>
+    </div>
+  );
+}
+```
+
+## API Reference
+
+### Parameters
+
+- `value` - The value to track
+
+### Returns
+
+- `previousValue` - The previous value from the last render
