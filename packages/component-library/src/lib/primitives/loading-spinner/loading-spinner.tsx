@@ -33,7 +33,7 @@ export const LoadingSpinner = forwardRef<SVGSVGElement, ILoadingSpinnerProps>(
           cx="12"
           cy="12"
           r="10"
-          strokeDasharray="47 16"
+          strokeDasharray="16 47"
           strokeDashoffset="0"
         />
       </svg>

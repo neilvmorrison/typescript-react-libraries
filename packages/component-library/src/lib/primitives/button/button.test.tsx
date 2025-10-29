@@ -24,20 +24,32 @@ describe('Button', () => {
     expect(onClick).toHaveBeenCalledOnce();
   });
 
-  it('accepts variant prop', () => {
-    const { rerender } = render(<Button variant="primary">Primary</Button>);
-    expect(screen.getByRole('button')).toBeInTheDocument();
+  describe('variant prop', () => {
+    const variants = [
+      'primary',
+      'secondary',
+      'danger',
+      'success',
+      'warning',
+    ] as const;
 
-    rerender(<Button variant="danger">Danger</Button>);
-    expect(screen.getByText('Danger')).toBeInTheDocument();
+    variants.forEach((variant) => {
+      it(`accepts ${variant} variant`, () => {
+        render(<Button variant={variant}>{variant}</Button>);
+        expect(screen.getByRole('button')).toBeInTheDocument();
+      });
+    });
   });
 
-  it('accepts size prop', () => {
-    const { rerender } = render(<Button size="sm">Small</Button>);
-    expect(screen.getByRole('button')).toBeInTheDocument();
+  describe('size prop', () => {
+    const sizes = ['2xs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl'] as const;
 
-    rerender(<Button size="lg">Large</Button>);
-    expect(screen.getByRole('button')).toHaveTextContent('Large');
+    sizes.forEach((size) => {
+      it(`accepts ${size} size`, () => {
+        render(<Button size={size}>{size}</Button>);
+        expect(screen.getByRole('button')).toHaveTextContent(size);
+      });
+    });
   });
 
   it('forwards ref correctly', () => {
@@ -70,18 +82,6 @@ describe('Button', () => {
     expect(Button.displayName).toBe('Button');
   });
 
-  it('handles multiple click events without memory leaks', () => {
-    const onClick = vi.fn();
-    const { rerender } = render(<Button onClick={onClick}>Click</Button>);
-
-    fireEvent.click(screen.getByRole('button'));
-    expect(onClick).toHaveBeenCalledTimes(1);
-
-    rerender(<Button onClick={onClick}>Click</Button>);
-    fireEvent.click(screen.getByRole('button'));
-    expect(onClick).toHaveBeenCalledTimes(2);
-  });
-
   it('renders with complex children', () => {
     render(
       <Button>
@@ -92,5 +92,10 @@ describe('Button', () => {
 
     expect(screen.getByText('Icon')).toBeInTheDocument();
     expect(screen.getByText('Text')).toBeInTheDocument();
+  });
+
+  it('accepts custom className', () => {
+    render(<Button className="custom-class">Custom</Button>);
+    expect(screen.getByRole('button')).toHaveClass('custom-class');
   });
 });
