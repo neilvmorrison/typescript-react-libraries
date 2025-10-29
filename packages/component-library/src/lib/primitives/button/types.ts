@@ -1,8 +1,8 @@
 import { ButtonHTMLAttributes } from 'react';
-import { ISize } from '../../types';
+import { IIntent, ISize } from '../../types';
 
 export interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'danger' | 'success' | 'warning';
+  variant?: IIntent;
   size?: ISize;
   leftSection?: React.ReactNode;
   rightSection?: React.ReactNode;
