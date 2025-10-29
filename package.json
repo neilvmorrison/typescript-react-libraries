@@ -9,9 +9,8 @@
     "packages/*"
   ],
   "scripts": {
-    "dev": "turbo run dev",
     "dev:docs": "cd packages/docs && npm run dev",
-    "build": "turbo run build",
+    "build:docs": "cd packages/docs && npm run build",
     "test": "vitest",
     "test:ui": "vitest --ui",
     "type-check": "tsc --noEmit",

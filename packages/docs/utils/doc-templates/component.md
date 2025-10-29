@@ -2,7 +2,7 @@
 
 [Brief description of the component and its purpose]
 
-## Usage
+## Example Usage
 
 ```typescript
 import { [ComponentName] } from '@libraries/component-library';
@@ -15,6 +15,8 @@ export function Example() {
   );
 }
 ```
+
+## Live Demo
 
 ## API Reference
 

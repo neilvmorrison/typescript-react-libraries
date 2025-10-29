@@ -1,63 +1,15 @@
 # Introduction
 
-Welcome to **@libraries** - a production-ready collection of React hooks, TypeScript utilities, and UI components.
+Here is a collection of TypeScript utilities, React hooks, and UI primitives I've built over the years to [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) up my projects and minimize time-to-development.
 
-## What is @libraries?
+## What is this?
 
-@libraries is a monorepo containing three carefully crafted packages designed to accelerate your React and TypeScript development:
+**This is not a library**. You do not need to install it, nor will you be dependent on me for updates, support or bugfixes. You copy and paste the code into your project and use it as if you wrote it yourself. Each Hook, Utility and Component comes complete with documentation, tests and source code. You can choose to take all the parts you need or none of them. I can't tell you what to do, I'm not the cops.
 
-1. **@libraries/hooks** - Essential React hooks for common use cases
-2. **@libraries/utilities** - TypeScript utilities for data manipulation and API communication
-3. **@libraries/components** - Accessible and composable React components
+## Why does this exist?
 
-## Design Principles
+Every project has a startup cost. For me, that startup cost is usually what kills my ability to get a foothold on the project/problem before I am forced to move on to other things. Boiler plates are fine, but suffer from the a maintenence burden of keeping them up-to-date with the latest dependencies and features.
 
-Our libraries are built on core principles:
+### Why not just get better at maintaining my own boilerplate projects?
 
-### 🎯 Production Ready
-
-Every utility and hook is production-tested and follows best practices for performance and reliability.
-
-### 📦 Tree-Shakeable
-
-Import only what you need. All packages are built with ESM and support tree-shaking to minimize bundle size.
-
-### 🔒 Type Safe
-
-Full TypeScript support with no `any` types. Enjoy complete type safety across all packages.
-
-### ♿ Accessible
-
-Components follow WCAG guidelines and use semantic HTML for maximum accessibility.
-
-### ⚡ Performant
-
-Optimized hooks and utilities with zero unnecessary renders or re-computations.
-
-## Quick Links
-
-- **[Hooks Documentation](/hooks)** - Learn about our collection of React hooks
-- **[Utilities Documentation](/utilities)** - Explore our TypeScript utilities
-- **[Components Documentation](/components)** - Discover our UI components
-
-## Installation
-
-Install the packages you need:
-
-```bash
-# Install all packages
-npm install @libraries/hooks @libraries/utilities @libraries/components
-
-# Or install individually
-npm install @libraries/hooks
-npm install @libraries/utilities
-npm install @libraries/components
-```
-
-## Getting Help
-
-- Check the documentation for each package
-- Review code examples in the documentation
-- Open an issue on GitHub
-
-Happy coding! 🚀
+I work across many different clients, each of which have their own application stack(s) and constraints. Atomized code snippets that can be easily pulled into are more useful than a monolithic boilerplate project.

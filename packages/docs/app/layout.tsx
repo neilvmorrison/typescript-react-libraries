@@ -2,6 +2,7 @@ import { Footer, Layout, Navbar } from 'nextra-theme-docs';
 import { Banner, Head } from 'nextra/components';
 import { getPageMap } from 'nextra/page-map';
 import 'nextra-theme-docs/style.css';
+import './globals.css';
 import { IBaseLayoutProps } from '@/types/base-layout';
 
 export const metadata = {
@@ -15,14 +16,15 @@ export const metadata = {
   },
 };
 
-const banner = <Banner storageKey="some-key">Nextra 4.0 is released 🎉</Banner>;
 const navbar = (
   <Navbar
-    logo={<b>Nextra</b>}
+    logo={<b>Naked UI</b>}
     // ... Your additional navbar options
   />
 );
-const footer = <Footer>MIT {new Date().getFullYear()} © Nextra.</Footer>;
+const footer = (
+  <Footer>MIT {new Date().getFullYear()} © Neil Morrison.</Footer>
+);
 
 export default async function RootLayout({ children }: IBaseLayoutProps) {
   return (
@@ -30,13 +32,12 @@ export default async function RootLayout({ children }: IBaseLayoutProps) {
       <Head></Head>
       <body>
         <Layout
-          banner={banner}
           navbar={navbar}
           pageMap={await getPageMap()}
           docsRepositoryBase="https://github.com/shuding/nextra/tree/main/docs"
           footer={footer}
         >
-          {children}
+          <div className="min-h-screen">{children}</div>
         </Layout>
       </body>
     </html>
