@@ -2,7 +2,7 @@
 
 import { Button, ToggleSwitch } from 'component-library';
 import { CopyIcon } from 'nextra/icons';
-import { ReactNode } from 'react';
+import { ReactNode, useState } from 'react';
 
 export interface ILiveDemoWrapperProps {
   title: string;
@@ -27,6 +27,7 @@ export const LiveDemoWrapper = ({
   leftSidePanel,
   subtitle,
 }: ILiveDemoWrapperProps) => {
+  const [showCode, setShowCode] = useState(false);
   return (
     <div className="border border-gray-200 rounded-md my-4">
       <div className="p-4 border-b border-gray-200">
@@ -34,10 +35,8 @@ export const LiveDemoWrapper = ({
           <h3 className="text-lg font-semibold">{title}</h3>
           <div className="flex items-center gap-2">
             <ToggleSwitch
-              size="sm"
-              uncheckedText="Show Code"
-              checkedText="Hide Code"
-              className="min-w-36"
+              checked={showCode}
+              onChange={() => setShowCode(!showCode)}
             />
             <Button variant="secondary" size="sm">
               <CopyIcon className="w-4 h-4" />
@@ -47,15 +46,21 @@ export const LiveDemoWrapper = ({
         {subtitle && <p className="text-sm text-gray-500">{subtitle}</p>}
       </div>
 
-      <div className="flex">
-        {leftSidePanel && (
-          <LiveDemoWrapperSidePanel>{leftSidePanel}</LiveDemoWrapperSidePanel>
-        )}
-        <LiveDemoWrapperContent>{children}</LiveDemoWrapperContent>
-        {rightSidePanel && (
-          <LiveDemoWrapperSidePanel>{rightSidePanel}</LiveDemoWrapperSidePanel>
-        )}
-      </div>
+      {showCode ? (
+        <div className="p-4 mih-h-[320px]">This is the code</div>
+      ) : (
+        <div className="flex">
+          {leftSidePanel && (
+            <LiveDemoWrapperSidePanel>{leftSidePanel}</LiveDemoWrapperSidePanel>
+          )}
+          <LiveDemoWrapperContent>{children}</LiveDemoWrapperContent>
+          {rightSidePanel && (
+            <LiveDemoWrapperSidePanel>
+              {rightSidePanel}
+            </LiveDemoWrapperSidePanel>
+          )}
+        </div>
+      )}
     </div>
   );
 };
