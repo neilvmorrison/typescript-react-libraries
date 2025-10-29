@@ -1,9 +1,9 @@
 const meta = {
   index: 'Home',
   introduction: 'Introduction',
+  components: 'Components',
   hooks: 'Hooks',
   utilities: 'Utilities',
-  components: 'Components',
   types: 'Types',
 };
 

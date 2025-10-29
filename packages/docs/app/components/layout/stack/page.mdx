@@ -1,17 +1,17 @@
-# Box
+# Stack
 
 [Brief description of the component and its purpose]
 
 ## Usage
 
 ```typescript
-import { Box } from '@libraries/component-library';
+import { Stack } from '@libraries/component-library';
 
 export function Example() {
   return (
-    <Box>
+    <Stack>
       [Example content]
-    </Box>
+    </Stack>
   );
 }
 ```
@@ -21,7 +21,7 @@ export function Example() {
 ### Import
 
 ```typescript
-import { Box } from '@libraries/component-library';
+import { Stack } from '@libraries/component-library';
 ```
 
 ### Props
@@ -32,23 +32,28 @@ import { Box } from '@libraries/component-library';
 | `children`   | `React.ReactNode`         | No       | Component content        | N/A       |
 | `...props`   | `[HTMLElementAttributes]` | No       | Standard HTML attributes | N/A       |
 
+### Variants
+
+- `'[variant1]'` - [Description]
+- `'[variant2]'` - [Description]
+
 ## Examples
 
 ### Basic
 
 ```typescript
-<Box>
+<Stack>
   [Example content]
-</Box>
+</Stack>
 ```
 
 ### With Props
 
 ```typescript
-<Box
+<Stack
   [prop1]="[value1]"
   [prop2]="[value2]"
 >
   [Content]
-</Box>
+</Stack>
 ```

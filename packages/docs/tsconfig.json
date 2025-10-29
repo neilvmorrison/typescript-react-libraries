@@ -32,7 +32,7 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     "**/*.mts",
-    "app/components/button/page.mdx"
+    "app/components/primitives/button/page.mdx"
   ],
   "exclude": ["node_modules"]
 }

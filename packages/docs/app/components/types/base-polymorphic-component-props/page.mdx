@@ -1,7 +1,4 @@
-import { HTMLAttributes, JSX } from 'react';
-
-export type * from '../components';
-
+```typescript
 export interface IBasePolymorphicComponentProps<
   T extends keyof JSX.IntrinsicElements = 'div',
 > extends HTMLAttributes<
@@ -11,3 +8,4 @@ export interface IBasePolymorphicComponentProps<
   > {
   as?: T;
 }
+```

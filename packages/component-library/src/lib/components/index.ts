@@ -1,2 +1,2 @@
-export * from '../primitives/button/button';
-export * from './typography/typography';
+export * from '../primitives';
+export * from './app-shell';

@@ -2,9 +2,12 @@ const meta = {
   index: 'Overview',
   primitives: {
     title: 'Primitives',
-    items: {
-      button: 'Button',
-    },
+  },
+  layout: {
+    title: 'Layout',
+  },
+  types: {
+    title: 'API Reference',
   },
 };
 

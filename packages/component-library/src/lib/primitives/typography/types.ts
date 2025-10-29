@@ -1,6 +1,7 @@
-import { forwardRef, HTMLAttributes, ElementType, createElement } from 'react';
+import { HTMLAttributes } from 'react';
 
-interface ITypographyProps extends Omit<HTMLAttributes<HTMLElement>, 'as'> {
+export interface ITypographyProps
+  extends Omit<HTMLAttributes<HTMLElement>, 'as'> {
   as?: ElementTag;
   variant?: ElementTag;
   size?:
@@ -40,7 +41,7 @@ interface ITypographyProps extends Omit<HTMLAttributes<HTMLElement>, 'as'> {
   className?: string;
 }
 
-type ElementTag =
+export type ElementTag =
   | 'h1'
   | 'h2'
   | 'h3'
@@ -52,16 +53,3 @@ type ElementTag =
   | 'div'
   | 'label'
   | 'blockquote';
-
-export const Typography = forwardRef<HTMLElement, ITypographyProps>(
-  ({ children, ...props }, ref) => {
-    const Element = props.as ?? 'p';
-    return createElement(
-      Element as ElementType,
-      { ref: ref as unknown, ...props },
-      children
-    );
-  }
-);
-
-Typography.displayName = 'Typography';
