@@ -8,12 +8,12 @@ Manages the open/closed state of UI elements like modals, drawers, and popovers 
 import { useDisclosure } from '@your-org/hooks';
 
 function Modal() {
-  const [isOpen, { open, close }] = useDisclosure();
+  const [value, { open, close }] = useDisclosure();
 
   return (
     <>
       <button onClick={open}>Open Modal</button>
-      {isOpen && (
+      {value && (
         <div className="modal">
           <p>Modal content</p>
           <button onClick={close}>Close</button>
@@ -30,7 +30,7 @@ None
 
 ## Returns
 
-- `[isOpen: boolean, controls: { open: () => void; close: () => void }]`
+- `[value: boolean, controls: { open: () => void; close: () => void }]`
 
 ## Description
 
@@ -42,12 +42,25 @@ Provides a simple boolean state for managing disclosure of UI elements. Returns 
 
 ```typescript
 function ConfirmDialog() {
-  const [isOpen, { open, close }] = useDisclosure();
+  const [value, { open, close }] = useDisclosure();
+
+  function handleError(error: Error) {
+    console.log(error) // do something with the error
+  }
+
+  async function handleDeleteItem() {
+    try {
+      await deleteItem();
+      close(); // close the modal after successful operation
+    } catch (error) {
+      handleError(error as Error);
+    }
+  }
 
   return (
     <>
       <button onClick={open}>Delete Item</button>
-      {isOpen && (
+      {value && (
         <div className="modal">
           <h2>Confirm Delete</h2>
           <p>Are you sure?</p>
