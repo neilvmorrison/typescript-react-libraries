@@ -1,6 +1,11 @@
 const meta = {
   index: 'Overview',
-  button: 'Button',
+  primitives: {
+    title: 'Primitives',
+    items: {
+      button: 'Button',
+    },
+  },
 };
 
 export default meta;
