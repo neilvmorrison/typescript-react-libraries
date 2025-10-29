@@ -1,0 +1,160 @@
+/* Toggle Switch Container */
+.switch-wrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+/* Hidden input */
+.switch-input {
+  display: none;
+}
+
+/* Toggle background track */
+.switch-track {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background-color: var(--color-gray-300);
+  border-radius: 9999px;
+  transition: background-color var(--transition-base);
+  padding: 0 var(--spacing-xs);
+}
+
+.switch-input:checked + .switch-track {
+  background-color: green;
+}
+
+.switch-input:disabled + .switch-track {
+  background-color: var(--color-gray-200);
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* Toggle thumb (circle) */
+.switch-thumb {
+  position: absolute;
+  top: 50%;
+  left: 2px;
+  width: 24px;
+  height: calc(100% - 4px);
+  background-color: var(--color-white);
+  border-radius: 50%;
+  transform: translateY(-50%) translateX(0);
+  transition: transform var(--transition-base);
+  box-shadow: var(--shadow-sm);
+}
+
+.switch-input:checked + .switch-track .switch-thumb {
+  transform: translateY(-50%) translateX(calc(100% + 4px));
+}
+
+/* Size variants */
+.switch-2xs {
+  width: 32px;
+  height: 16px;
+}
+
+.switch-input:checked + .switch-track.switch-2xs .switch-thumb {
+  transform: translateY(-50%) translateX(4px);
+}
+
+.switch-xs {
+  width: 40px;
+  height: 20px;
+}
+
+.switch-input:checked + .switch-track.switch-xs .switch-thumb {
+  transform: translateY(-50%) translateX(12px);
+}
+
+.switch-sm {
+  width: 48px;
+  height: 24px;
+}
+
+.switch-input:checked + .switch-track.switch-sm .switch-thumb {
+  transform: translateY(-50%) translateX(20px);
+}
+
+.switch-md {
+  width: 56px;
+  height: 28px;
+}
+
+.switch-input:checked + .switch-track.switch-md .switch-thumb {
+  transform: translateY(-50%) translateX(28px);
+}
+
+.switch-lg {
+  width: 64px;
+  height: 32px;
+}
+
+.switch-input:checked + .switch-track.switch-lg .switch-thumb {
+  transform: translateY(-50%) translateX(36px);
+}
+
+.switch-xl {
+  width: 72px;
+  height: 36px;
+}
+
+.switch-input:checked + .switch-track.switch-xl .switch-thumb {
+  transform: translateY(-50%) translateX(44px);
+}
+
+.switch-2xl {
+  width: 80px;
+  height: 40px;
+}
+
+.switch-input:checked + .switch-track.switch-2xl .switch-thumb {
+  transform: translateY(-50%) translateX(52px);
+}
+
+/* Label */
+.switch-label {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
+  user-select: none;
+  cursor: pointer;
+}
+
+/* Track text labels */
+.switch-text-off,
+.switch-text-on {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.75em;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-white);
+  user-select: none;
+  pointer-events: none;
+  transition: opacity var(--transition-base);
+  white-space: nowrap;
+}
+
+.switch-text-off {
+  right: var(--spacing-xs);
+  left: auto;
+  opacity: 1;
+}
+
+.switch-text-on {
+  left: var(--spacing-xs);
+  right: auto;
+  opacity: 0;
+}
+
+/* Show/hide text based on state */
+.switch-input:checked + .switch-track .switch-text-off {
+  opacity: 0;
+}
+
+.switch-input:checked + .switch-track .switch-text-on {
+  opacity: 1;
+}

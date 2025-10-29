@@ -1,5 +1,7 @@
 'use client';
 
+import { Button, ToggleSwitch } from 'component-library';
+import { CopyIcon } from 'nextra/icons';
 import { ReactNode } from 'react';
 
 export interface ILiveDemoWrapperProps {
@@ -28,7 +30,20 @@ export const LiveDemoWrapper = ({
   return (
     <div className="border border-gray-200 rounded-md my-4">
       <div className="p-4 border-b border-gray-200">
-        <h3 className="text-lg font-semibold">{title}</h3>
+        <div className="flex items-center justify-between">
+          <h3 className="text-lg font-semibold">{title}</h3>
+          <div className="flex items-center gap-2">
+            <ToggleSwitch
+              size="sm"
+              uncheckedText="Show Code"
+              checkedText="Hide Code"
+              className="min-w-36"
+            />
+            <Button variant="secondary" size="sm">
+              <CopyIcon className="w-4 h-4" />
+            </Button>
+          </div>
+        </div>
         {subtitle && <p className="text-sm text-gray-500">{subtitle}</p>}
       </div>
 

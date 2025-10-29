@@ -1,26 +1,15 @@
 'use client';
-import { Button } from 'component-library';
+import { Button, ToggleSwitch } from 'component-library';
 import { LiveDemoWrapper } from '@/components/live-demo-wrapper/live-demo-wrapper';
 import { useState } from 'react';
 import { ArrowRightIcon, TrashIcon } from '@/components/icons';
 
-const RightSidePanel = ({
-  count,
-  handleReset,
-}: {
-  count: number;
-  handleReset: () => void;
-}) => {
-  return (
-    <div>
-      <p>Button clicked {count} times</p>
-      <Button onClick={handleReset}>Reset</Button>
-    </div>
-  );
-};
-
 export function LiveExample() {
   const [count, setCount] = useState(0);
+  const [showLeft, setShowLeft] = useState(true);
+  const [showRight, setShowRight] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   const handleClick = () => {
     setCount(count + 1);
   };
@@ -29,44 +18,73 @@ export function LiveExample() {
     setCount(0);
   };
 
+  const getDecorationType = () => {
+    let type = '';
+    if (showLeft && showRight) {
+      type = 'left and right icons';
+    } else if (showLeft) {
+      type = 'left icon';
+    } else if (showRight) {
+      type = 'right icon';
+    } else {
+      type = 'no decorations';
+    }
+    return loading ? type + ' and loading state' : type;
+  };
+
   return (
     <div className="flex flex-col gap-2">
       <LiveDemoWrapper
-        title="Button"
-        subtitle="A flexible button component with multiple variants and sizes, supporting all standard HTML button attributes."
+        title="DefaultButton"
+        subtitle="The default button component."
         rightSidePanel={
-          <RightSidePanel count={count} handleReset={handleReset} />
+          <div>
+            <p className="mb-2">Button clicked {count} times</p>
+            <Button onClick={handleReset} className="bg-slate-200">
+              Reset
+            </Button>
+          </div>
         }
       >
         <div className="flex flex-col gap-2">
           <Button onClick={handleClick}>Default Button</Button>
-          <Button onClick={handleClick} className="bg-blue-500 text-white">
-            Custom Styled Button
-          </Button>
         </div>
       </LiveDemoWrapper>
       <LiveDemoWrapper
-        title="Button with Icons"
-        subtitle="A flexible button component with left and right icons."
+        title="Button with Decorations"
+        subtitle="The button supports left and right sections and has a built-in loading state."
         rightSidePanel={
-          <RightSidePanel count={count} handleReset={handleReset} />
+          <div className="flex flex-col gap-2">
+            <ToggleSwitch
+              label="Show Left Section"
+              checked={showLeft}
+              onChange={(e) => setShowLeft(e.target.checked)}
+            />
+            <ToggleSwitch
+              label="Show Right Section"
+              checked={showRight}
+              onChange={(e) => setShowRight(e.target.checked)}
+            />
+            <ToggleSwitch
+              label="Loading"
+              checked={loading}
+              onChange={(e) => setLoading(e.target.checked)}
+            />
+          </div>
         }
       >
         <div className="flex flex-col gap-2">
           <Button
             onClick={handleClick}
-            leftSection={<TrashIcon className="w-4 h-4" />}
+            leftSection={
+              showLeft ? <TrashIcon className="w-4 h-4" /> : undefined
+            }
+            rightSection={
+              showRight ? <ArrowRightIcon className="w-4 h-4" /> : undefined
+            }
+            loading={loading}
           >
-            Left Icon
-          </Button>
-          <Button
-            onClick={handleClick}
-            rightSection={<ArrowRightIcon className="w-4 h-4" />}
-          >
-            Right Icon
-          </Button>
-          <Button onClick={handleClick} loading>
-            Loading State
+            Button with {getDecorationType()}
           </Button>
         </div>
       </LiveDemoWrapper>

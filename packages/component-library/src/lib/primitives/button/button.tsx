@@ -9,6 +9,7 @@ export const Button = forwardRef<HTMLButtonElement, IButtonProps>(
     {
       children,
       className,
+      variant,
       leftSection,
       rightSection,
       loading,
@@ -20,11 +21,16 @@ export const Button = forwardRef<HTMLButtonElement, IButtonProps>(
     return (
       <button
         ref={ref}
-        className={cn('button-root', className)}
+        className={cn(
+          'button-root',
+          className,
+          variant ? `button-${variant}` : undefined
+        )}
         disabled={disabled ?? loading}
         {...props}
       >
-        {(loading ?? leftSection) && (
+        {/* eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing */}
+        {(loading || leftSection) && (
           <span className="button-left-icon">
             {loading ? <LoadingSpinner size="sm" /> : leftSection}
           </span>
