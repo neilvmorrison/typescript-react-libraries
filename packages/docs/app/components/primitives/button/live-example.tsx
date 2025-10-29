@@ -37,12 +37,7 @@ export function LiveExample() {
       }
     >
       <div className="flex flex-col gap-2">
-        <Button
-          onClick={handleClick}
-          className="content-fit bg-[#FF4a55] text-white"
-        >
-          Default Button
-        </Button>
+        <Button onClick={handleClick}>Default Button</Button>
         <Button variant="primary" onClick={handleClick}>
           Primary Button
         </Button>
