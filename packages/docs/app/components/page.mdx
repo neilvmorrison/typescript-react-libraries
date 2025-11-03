@@ -1,6 +1,30 @@
 # React UI Components
 
-A collection of minimally-styled and composable react components that meet WCAG AAA accessibility standards.
+A collection of minimally-styled and composable react components that meet WCAG AAA accessibility standards. These react components are broken into categories:
+
+### Primitives
+
+A collection of raw, minimally-styled HTML elements that have been wrapped in a `forwardRef` function to accept a ref and props. These components have no internal state or logic and are designed to be used as building blocks for other components.
+
+### Components
+
+A collection of React components that are built on top of the primitives. These components have minimal state and logic, but have a different interface to their HTML counterparts.
+
+### Layouts
+
+A collection of React components that are designed to layout other components.
+
+### Data Display
+
+A collection of React components that are designed to display data.
+
+## Philosphy
+
+The components are designed to minimize the amount of internal state and logic to keep the component as simple and easy to use as possible. Components are minimially styled and are designed to work with your existing styling system.
+
+### Component Variants
+
+Components, such as buttons, can have multiple variants, such as primary, secondary, danger, success, warning, etc. These variants are unstyled and appear visually identical to the default variant, but can easily be styled to fit your needs by following the styling guide below. You can also create your own variants by extending the component and overriding the default styles.
 
 ## How to install
 
