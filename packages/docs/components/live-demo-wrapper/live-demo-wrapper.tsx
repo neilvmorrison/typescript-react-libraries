@@ -38,16 +38,18 @@ export const LiveDemoWrapper = ({
               checked={showCode}
               onChange={() => setShowCode(!showCode)}
             />
-            <Button variant="secondary" size="sm">
-              <CopyIcon className="w-4 h-4" />
-            </Button>
           </div>
         </div>
         {subtitle && <p className="text-sm text-gray-500">{subtitle}</p>}
       </div>
 
       {showCode ? (
-        <div className="p-4 mih-h-[320px]">This is the code</div>
+        <div className="p-4 mih-h-[320px]">
+          <Button variant="secondary" size="sm">
+            <CopyIcon className="w-4 h-4" />
+          </Button>
+          This is the code
+        </div>
       ) : (
         <div className="flex">
           {leftSidePanel && (

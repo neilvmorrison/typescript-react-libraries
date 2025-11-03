@@ -57,7 +57,7 @@ describe('ToggleSwitch', () => {
 
   it('toggles checked state on click', () => {
     render(<ToggleSwitch />);
-    const input = screen.getByRole('checkbox');
+    const input: HTMLInputElement = screen.getByRole('checkbox');
 
     expect(input.checked).toBe(false);
     fireEvent.click(input);
