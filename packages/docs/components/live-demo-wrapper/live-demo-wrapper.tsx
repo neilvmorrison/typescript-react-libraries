@@ -17,7 +17,7 @@ const LiveDemoWrapperContent = ({ children }: { children: ReactNode }) => {
 };
 
 const LiveDemoWrapperSidePanel = ({ children }: { children: ReactNode }) => {
-  return <div className="min-w-64 bg-gray-100 p-4">{children}</div>;
+  return <div className="min-w-64  p-4">{children}</div>;
 };
 
 export const LiveDemoWrapper = ({
