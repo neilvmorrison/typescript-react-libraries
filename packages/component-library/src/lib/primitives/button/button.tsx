@@ -35,7 +35,7 @@ export const Button = forwardRef<HTMLButtonElement, IButtonProps>(
             {loading ? <LoadingSpinner size="sm" /> : leftSection}
           </span>
         )}
-        {children}
+        <span className="button-content">{children}</span>
         {rightSection && (
           <span className="button-right-icon">{rightSection}</span>
         )}

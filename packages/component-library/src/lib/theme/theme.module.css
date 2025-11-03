@@ -121,5 +121,6 @@
     /* Borders - Dark Mode */
     --border-color-default: #374151;
     --border-color-focus: #60a5fa;
+    --color-button-hover: rgba(255, 255, 255, 0.1);
   }
 }
