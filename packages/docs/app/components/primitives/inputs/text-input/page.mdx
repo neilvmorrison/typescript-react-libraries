@@ -1,1 +1,126 @@
+import { LiveExample } from './live-example';
+
 # TextInput
+
+Simple text input component that extends standard HTML input elements. Supports all HTML input attributes and types.
+
+## Usage
+
+```typescript
+import { TextInput } from '@libraries/component-library';
+
+export function Example() {
+  const [value, setValue] = useState('');
+
+  return (
+    <div>
+      <TextInput
+        type="email"
+        placeholder="Enter your email"
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+      />
+      <TextInput
+        type="password"
+        placeholder="Enter your password"
+      />
+      <TextInput
+        placeholder="Enter your username"
+      />
+    </div>
+  );
+}
+```
+
+## Live Example
+
+<LiveExample />
+
+## API Reference
+
+### Import
+
+```typescript
+import { TextInput } from '@libraries/component-library';
+```
+
+### Props
+
+| Name       | Type                                    | Required | Description                       | Default  |
+| ---------- | --------------------------------------- | -------- | --------------------------------- | -------- |
+| `type`     | `string`                                | No       | HTML input type                   | `'text'` |
+| `ref`      | `React.Ref<HTMLInputElement>`           | No       | Forward ref to HTML input element | N/A      |
+| `...props` | `InputHTMLAttributes<HTMLInputElement>` | No       | Standard HTML input attributes    | N/A      |
+
+## Examples
+
+### Basic Usage
+
+```typescript
+<TextInput placeholder="Enter text..." />
+```
+
+### Email Input
+
+```typescript
+<TextInput
+  type="email"
+  placeholder="you@example.com"
+/>
+```
+
+### Password Input
+
+```typescript
+<TextInput
+  type="password"
+  placeholder="••••••••"
+/>
+```
+
+### Number Input
+
+```typescript
+<TextInput
+  type="number"
+  placeholder="Enter a number"
+  min={0}
+  max={100}
+/>
+```
+
+### Disabled State
+
+```typescript
+<TextInput
+  placeholder="This field is disabled"
+  disabled
+/>
+```
+
+### With Ref
+
+```typescript
+import { useRef } from 'react';
+
+export function TextInputWithRef() {
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  return (
+    <TextInput
+      ref={inputRef}
+      placeholder="Focus me"
+      onFocus={() => inputRef.current?.select()}
+    />
+  );
+}
+```
+
+### Search Input
+
+```typescript
+<TextInput
+  type="search"
+  placeholder="Search..."
+/>
+```

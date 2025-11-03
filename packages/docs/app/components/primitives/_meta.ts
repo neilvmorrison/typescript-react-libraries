@@ -1,4 +1,5 @@
 const meta = {
+  index: 'Overview',
   button: 'Button',
   inputs: 'Inputs',
 };
