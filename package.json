@@ -13,6 +13,8 @@
     "build:docs": "pnpm --filter docs build",
     "test": "vitest",
     "test:ui": "vitest --ui",
+    "test:hooks": "pnpm --filter hooks test",
+    "test:utilities": "pnpm --filter utilities test",
     "type-check": "tsc --noEmit",
     "lint": "eslint . --ext .ts,.tsx",
     "lint:fix": "eslint . --ext .ts,.tsx --fix",

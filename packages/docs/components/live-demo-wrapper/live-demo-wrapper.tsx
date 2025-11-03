@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, ToggleSwitch } from 'component-library';
+import { Button, ToggleSwitch, Typography } from 'component-library';
 import { CopyIcon } from 'nextra/icons';
 import { ReactNode, useState } from 'react';
 
@@ -34,6 +34,9 @@ export const LiveDemoWrapper = ({
         <div className="flex items-center justify-between">
           <h3 className="text-lg font-semibold">{title}</h3>
           <div className="flex items-center gap-2">
+            <Typography as="label">
+              {showCode ? 'Hide Code' : 'Show Code'}
+            </Typography>
             <ToggleSwitch
               checked={showCode}
               onChange={() => setShowCode(!showCode)}
