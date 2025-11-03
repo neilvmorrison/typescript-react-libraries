@@ -3,14 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 5173",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
     "postbuild": "pagefind --site .next/server/app --output-path public/_pagefind"
   },
   "dependencies": {
-    "component-library": "*",
+    "component-library": "workspace:*",
     "next": "16.0.0",
     "nextra": "^4.6.0",
     "nextra-theme-docs": "^4.6.0",

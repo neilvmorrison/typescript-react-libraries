@@ -4,17 +4,13 @@
   "description": "A collection of TypeScript utilities, React hooks, and UI primitives",
   "private": true,
   "type": "module",
-  "packageManager": "npm@10.0.0",
-  "ts-node": {
-    "esm": true,
-    "experimentalEsm": true
-  },
+  "packageManager": "pnpm@9.0.0",
   "workspaces": [
     "packages/*"
   ],
   "scripts": {
-    "dev:docs": "cd packages/docs && npm run dev",
-    "build:docs": "cd packages/docs && npm run build",
+    "dev:docs": "pnpm --filter docs dev",
+    "build:docs": "pnpm --filter docs build",
     "test": "vitest",
     "test:ui": "vitest --ui",
     "type-check": "tsc --noEmit",

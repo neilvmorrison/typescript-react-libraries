@@ -6,3 +6,4 @@ import './lib/theme/theme.module.css';
 
 // Component styles
 import './lib/primitives/button/button.module.css';
+import './lib/primitives/inputs/radio-group/radio-group.module.css';

@@ -1,0 +1,186 @@
+import { LiveExample } from './live-example';
+
+# RadioGroup
+
+A flexible radio group component that allows users to select a single option from a set of mutually exclusive choices. Supports multiple layouts, sizes, disabled states, and error messaging.
+
+## Usage
+
+```typescript
+import { RadioGroup } from '@libraries/component-library';
+
+export function Example() {
+  const [value, setValue] = useState('option1');
+
+  return (
+    <RadioGroup
+      options={[
+        { label: 'Option 1', value: 'option1' },
+        { label: 'Option 2', value: 'option2' },
+        { label: 'Option 3', value: 'option3' },
+      ]}
+      value={value}
+      onChange={(e) => setValue(e.currentTarget.value)}
+      label="Select an option"
+    />
+  );
+}
+```
+
+## Live Example
+
+<LiveExample />
+
+## API Reference
+
+### Import
+
+```typescript
+import { RadioGroup } from '@libraries/component-library';
+```
+
+### Props
+
+| Name        | Type                                             | Required | Description                                                           | Default      |
+| ----------- | ------------------------------------------------ | -------- | --------------------------------------------------------------------- | ------------ |
+| `options`   | `IRadioOption[]`                                 | Yes      | Array of radio options with label, value, and optional disabled state | N/A          |
+| `label`     | `string`                                         | No       | Label for the entire radio group                                      | N/A          |
+| `error`     | `string`                                         | No       | Error message to display below the group                              | N/A          |
+| `value`     | `string`                                         | No       | The currently selected value (controlled component)                   | N/A          |
+| `onChange`  | `(event: ChangeEvent<HTMLInputElement>) => void` | No       | Callback when selection changes                                       | N/A          |
+| `disabled`  | `boolean`                                        | No       | Disables all options in the group                                     | N/A          |
+| `direction` | `'vertical' \| 'horizontal'`                     | No       | Layout direction of the options                                       | `'vertical'` |
+| `size`      | `'sm' \| 'md' \| 'lg'`                           | No       | Size of the radio buttons and text                                    | `'md'`       |
+| `ref`       | `React.Ref<HTMLInputElement>`                    | No       | Forward ref to the first radio input element                          | N/A          |
+| `...props`  | `InputHTMLAttributes<HTMLInputElement>`          | No       | Standard HTML input attributes                                        | N/A          |
+
+### IRadioOption Interface
+
+```typescript
+interface IRadioOption {
+  label: string; // Display text for the option
+  value: string; // Value to use when this option is selected
+  disabled?: boolean; // Optional: disable just this option
+}
+```
+
+## Examples
+
+### Basic Usage
+
+```typescript
+<RadioGroup
+  options={[
+    { label: 'Yes', value: 'yes' },
+    { label: 'No', value: 'no' },
+  ]}
+  label="Do you agree?"
+  value={selected}
+  onChange={(e) => setSelected(e.currentTarget.value)}
+/>
+```
+
+### Horizontal Layout
+
+```typescript
+<RadioGroup
+  options={[
+    { label: 'Small', value: 'sm' },
+    { label: 'Medium', value: 'md' },
+    { label: 'Large', value: 'lg' },
+  ]}
+  direction="horizontal"
+  value={size}
+  onChange={(e) => setSize(e.currentTarget.value)}
+/>
+```
+
+### With Error Message
+
+```typescript
+<RadioGroup
+  options={options}
+  label="Select an option"
+  value={value}
+  onChange={handleChange}
+  error={!value ? 'This field is required' : undefined}
+/>
+```
+
+### Different Sizes
+
+```typescript
+<RadioGroup options={options} size="sm" />
+<RadioGroup options={options} size="md" />
+<RadioGroup options={options} size="lg" />
+```
+
+### Disabled State
+
+```typescript
+{/* Disable entire group */}
+<RadioGroup options={options} disabled />
+
+{/* Disable individual options */}
+<RadioGroup
+  options={[
+    { label: 'Enabled', value: 'enabled' },
+    { label: 'Disabled', value: 'disabled', disabled: true },
+  ]}
+/>
+```
+
+### Controlled Component
+
+```typescript
+import { useState } from 'react';
+
+export function ControlledRadioGroup() {
+  const [selected, setSelected] = useState('option1');
+
+  return (
+    <div>
+      <RadioGroup
+        options={[
+          { label: 'Option 1', value: 'option1' },
+          { label: 'Option 2', value: 'option2' },
+          { label: 'Option 3', value: 'option3' },
+        ]}
+        value={selected}
+        onChange={(e) => setSelected(e.currentTarget.value)}
+        label="Choose one"
+      />
+      <p>Selected: {selected}</p>
+    </div>
+  );
+}
+```
+
+### With Ref
+
+```typescript
+import { useRef } from 'react';
+
+export function RadioGroupWithRef() {
+  const radioRef = useRef<HTMLInputElement>(null);
+
+  return (
+    <RadioGroup
+      ref={radioRef}
+      options={options}
+      onChange={(e) => {
+        console.log('Selected value:', e.currentTarget.value);
+        radioRef.current?.focus();
+      }}
+    />
+  );
+}
+```
+
+## Accessibility
+
+- Uses semantic `<fieldset>` and `<legend>` for proper grouping
+- Each option has an associated `<label>` for easy clicking
+- Unique IDs generated automatically for proper label association
+- Keyboard navigation fully supported (arrow keys to move between options)
+- Disabled states properly communicated through HTML attributes
