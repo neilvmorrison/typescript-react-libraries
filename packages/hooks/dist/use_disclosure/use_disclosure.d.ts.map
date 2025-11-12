@@ -1,0 +1,1 @@
+{"version":3,"file":"use_disclosure.d.ts","sourceRoot":"","sources":["../../src/use_disclosure/use_disclosure.ts"],"names":[],"mappings":"AAEA,MAAM,MAAM,mBAAmB,GAAG;IAChC,OAAO;IACP;QAAE,IAAI,EAAE,MAAM,IAAI,CAAC;QAAC,KAAK,EAAE,MAAM,IAAI,CAAC;QAAC,MAAM,EAAE,MAAM,IAAI,CAAA;KAAE;CAC5D,CAAC;AAEF,wBAAgB,aAAa,CAAC,YAAY,UAAQ,GAAG,mBAAmB,CAgBvE"}

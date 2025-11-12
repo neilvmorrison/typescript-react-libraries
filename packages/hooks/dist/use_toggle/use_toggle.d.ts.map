@@ -1,0 +1,1 @@
+{"version":3,"file":"use_toggle.d.ts","sourceRoot":"","sources":["../../src/use_toggle/use_toggle.ts"],"names":[],"mappings":"AAEA,MAAM,MAAM,gBAAgB,CAAC,CAAC,SAAS,OAAO,GAAG,MAAM,EAAE,GAAG,OAAO,IAAI;IACrE,CAAC,SAAS,OAAO,GAAG,OAAO,GAAG,MAAM;IACpC,MAAM,IAAI;CACX,CAAC;AAEF,wBAAgB,SAAS,CACvB,YAAY,EAAE,OAAO,GAAG,MAAM,EAAE,GAC/B,gBAAgB,CAAC,OAAO,YAAY,CAAC,CAkBvC"}

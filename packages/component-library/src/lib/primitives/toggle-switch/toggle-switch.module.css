@@ -38,9 +38,9 @@
   position: absolute;
   top: 50%;
   left: 2px;
-  width: 24px;
-  height: calc(100% - 4px);
-  background-color: var(--color-white);
+  width: 12px;
+  height: 12px;
+  background-color: var(--surface-background-color);
   border-radius: 50%;
   transform: translateY(-50%) translateX(0);
   transition: transform var(--transition-base);
@@ -57,8 +57,13 @@
   height: 16px;
 }
 
+.switch-2xs .switch-thumb {
+  width: 12px;
+  height: 12px;
+}
+
 .switch-input:checked + .switch-track.switch-2xs .switch-thumb {
-  transform: translateY(-50%) translateX(4px);
+  transform: translateY(-50%) translateX(16px);
 }
 
 .switch-xs {
@@ -66,8 +71,13 @@
   height: 20px;
 }
 
+.switch-xs .switch-thumb {
+  width: 16px;
+  height: 16px;
+}
+
 .switch-input:checked + .switch-track.switch-xs .switch-thumb {
-  transform: translateY(-50%) translateX(12px);
+  transform: translateY(-50%) translateX(20px);
 }
 
 .switch-sm {
@@ -75,13 +85,23 @@
   height: 24px;
 }
 
+.switch-sm .switch-thumb {
+  width: 20px;
+  height: 20px;
+}
+
 .switch-input:checked + .switch-track.switch-sm .switch-thumb {
-  transform: translateY(-50%) translateX(20px);
+  transform: translateY(-50%) translateX(24px);
 }
 
 .switch-md {
   width: 56px;
   height: 28px;
+}
+
+.switch-md .switch-thumb {
+  width: 24px;
+  height: 24px;
 }
 
 .switch-input:checked + .switch-track.switch-md .switch-thumb {
@@ -93,8 +113,13 @@
   height: 32px;
 }
 
+.switch-lg .switch-thumb {
+  width: 28px;
+  height: 28px;
+}
+
 .switch-input:checked + .switch-track.switch-lg .switch-thumb {
-  transform: translateY(-50%) translateX(36px);
+  transform: translateY(-50%) translateX(32px);
 }
 
 .switch-xl {
@@ -102,8 +127,13 @@
   height: 36px;
 }
 
+.switch-xl .switch-thumb {
+  width: 32px;
+  height: 32px;
+}
+
 .switch-input:checked + .switch-track.switch-xl .switch-thumb {
-  transform: translateY(-50%) translateX(44px);
+  transform: translateY(-50%) translateX(36px);
 }
 
 .switch-2xl {
@@ -111,8 +141,13 @@
   height: 40px;
 }
 
+.switch-2xl .switch-thumb {
+  width: 36px;
+  height: 36px;
+}
+
 .switch-input:checked + .switch-track.switch-2xl .switch-thumb {
-  transform: translateY(-50%) translateX(52px);
+  transform: translateY(-50%) translateX(40px);
 }
 
 /* Label */
